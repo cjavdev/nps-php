@@ -28,7 +28,7 @@ To use this package, install via Composer by adding the following to your applic
     }
   ],
   "require": {
-    "org-placeholder/nps": "dev-main"
+    "cjavdev/nps-php": "dev-main"
   }
 }
 ```
