@@ -1,0 +1,115 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Nps\Services;
+
+use Nps\Client;
+use Nps\Core\Exceptions\APIException;
+use Nps\Core\Util;
+use Nps\Multimedia\MultimediaListAudioResponseItem;
+use Nps\Multimedia\MultimediaListVideosResponseItem;
+use Nps\RequestOptions;
+use Nps\ServiceContracts\MultimediaContract;
+use Nps\Services\Multimedia\GalleriesService;
+
+/**
+ * @phpstan-import-type RequestOpts from \Nps\RequestOptions
+ */
+final class MultimediaService implements MultimediaContract
+{
+    /**
+     * @api
+     */
+    public MultimediaRawService $raw;
+
+    /**
+     * @api
+     */
+    public GalleriesService $galleries;
+
+    /**
+     * @internal
+     */
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MultimediaRawService($client);
+        $this->galleries = new GalleriesService($client);
+    }
+
+    /**
+     * @api
+     *
+     * @param int $limit Number of results to return per request. Default is 50.
+     * @param list<string> $parkCode a comma delimited list of park codes (each 4 characters in length)
+     * @param string $q Term to search on
+     * @param int $start Get the next [limit] results starting with this number. Default is 0.
+     * @param list<string> $stateCode a comma delimited list of 2 character state codes
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return list<MultimediaListAudioResponseItem>
+     *
+     * @throws APIException
+     */
+    public function listAudio(
+        ?int $limit = null,
+        ?array $parkCode = null,
+        ?string $q = null,
+        ?int $start = null,
+        ?array $stateCode = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): array {
+        $params = Util::removeNulls(
+            [
+                'limit' => $limit,
+                'parkCode' => $parkCode,
+                'q' => $q,
+                'start' => $start,
+                'stateCode' => $stateCode,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listAudio(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * @param int $limit Number of results to return per request. Default is 50.
+     * @param list<string> $parkCode a comma delimited list of park codes (each 4 characters in length)
+     * @param string $q Term to search on
+     * @param int $start Get the next [limit] results starting with this number. Default is 0.
+     * @param list<string> $stateCode a comma delimited list of 2 character state codes
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return list<MultimediaListVideosResponseItem>
+     *
+     * @throws APIException
+     */
+    public function listVideos(
+        ?int $limit = null,
+        ?array $parkCode = null,
+        ?string $q = null,
+        ?int $start = null,
+        ?array $stateCode = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): array {
+        $params = Util::removeNulls(
+            [
+                'limit' => $limit,
+                'parkCode' => $parkCode,
+                'q' => $q,
+                'start' => $start,
+                'stateCode' => $stateCode,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listVideos(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+}
