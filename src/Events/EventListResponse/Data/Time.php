@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\Events\EventListResponse\Data\Data;
+namespace Nps\Events\EventListResponse\Data;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;

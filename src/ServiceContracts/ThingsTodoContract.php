@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ThingsTodo\ThingsTodoListResponse;
 
@@ -21,9 +22,11 @@ interface ThingsTodoContract
      * @param string $parkCode a comma delimited list of 4 character park codes
      * @param string $q a string to search for
      * @param list<string> $sort A comma delimited list of resource properties to sort the results by. Ascending order is assumed for each property. If descending order is desired, the unary negative should prefix the property name. Invalid property values will be ignored. If no sort parameter is passed in a request, the default sort is by descending order of date last modified. (Note that the date last modified is an unexposed property.) If sorting by relevanceScore, you will likely use -relevanceScore as a higher score indicates a more accurate result. The only sort option, besides the default, is relevanceScore.
-     * @param string $start Get the next [limit] results starting with this number. Default is 0.
+     * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param string $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
+     *
+     * @return LimitStartPagination<ThingsTodoListResponse>
      *
      * @throws APIException
      */
@@ -33,8 +36,8 @@ interface ThingsTodoContract
         ?string $parkCode = null,
         ?string $q = null,
         ?array $sort = null,
-        ?string $start = null,
+        ?int $start = null,
         ?string $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ThingsTodoListResponse;
+    ): LimitStartPagination;
 }

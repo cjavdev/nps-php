@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\ThingsTodo\ThingsTodoListResponse\Data\Data\Image;
+namespace Nps\ThingsTodo\ThingsTodoListResponse\Data\Image;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;

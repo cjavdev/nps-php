@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\RoadEvents\RoadEventListResponse\Data\Feature;
+namespace Nps\RoadEvents\RoadEventListResponse\Feature;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;

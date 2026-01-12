@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Nps\RoadEvents\RoadEventListResponse\Data\Feature;
+namespace Nps\RoadEvents\RoadEventListResponse\Feature;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
-use Nps\RoadEvents\RoadEventListResponse\Data\Feature\Properties\CoreDetails;
-use Nps\RoadEvents\RoadEventListResponse\Data\Feature\Properties\TypesOfWork;
+use Nps\RoadEvents\RoadEventListResponse\Feature\Properties\CoreDetails;
+use Nps\RoadEvents\RoadEventListResponse\Feature\Properties\TypesOfWork;
 
 /**
- * @phpstan-import-type CoreDetailsShape from \Nps\RoadEvents\RoadEventListResponse\Data\Feature\Properties\CoreDetails
- * @phpstan-import-type TypesOfWorkShape from \Nps\RoadEvents\RoadEventListResponse\Data\Feature\Properties\TypesOfWork
+ * @phpstan-import-type CoreDetailsShape from \Nps\RoadEvents\RoadEventListResponse\Feature\Properties\CoreDetails
+ * @phpstan-import-type TypesOfWorkShape from \Nps\RoadEvents\RoadEventListResponse\Feature\Properties\TypesOfWork
  *
  * @phpstan-type PropertiesShape = array{
  *   coreDetails?: null|CoreDetails|CoreDetailsShape,

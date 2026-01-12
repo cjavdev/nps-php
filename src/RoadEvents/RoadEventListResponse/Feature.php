@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Nps\RoadEvents\RoadEventListResponse\Data;
+namespace Nps\RoadEvents\RoadEventListResponse;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
-use Nps\RoadEvents\RoadEventListResponse\Data\Feature\Geometry;
-use Nps\RoadEvents\RoadEventListResponse\Data\Feature\Properties;
+use Nps\RoadEvents\RoadEventListResponse\Feature\Geometry;
+use Nps\RoadEvents\RoadEventListResponse\Feature\Properties;
 
 /**
- * @phpstan-import-type GeometryShape from \Nps\RoadEvents\RoadEventListResponse\Data\Feature\Geometry
- * @phpstan-import-type PropertiesShape from \Nps\RoadEvents\RoadEventListResponse\Data\Feature\Properties
+ * @phpstan-import-type GeometryShape from \Nps\RoadEvents\RoadEventListResponse\Feature\Geometry
+ * @phpstan-import-type PropertiesShape from \Nps\RoadEvents\RoadEventListResponse\Feature\Properties
  *
  * @phpstan-type FeatureShape = array{
  *   id?: string|null,

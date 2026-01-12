@@ -6,6 +6,7 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ThingsTodo\ThingsTodoListParams;
 use Nps\ThingsTodo\ThingsTodoListResponse;
@@ -21,7 +22,7 @@ interface ThingsTodoRawContract
      * @param array<string,mixed>|ThingsTodoListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ThingsTodoListResponse>
+     * @return BaseResponse<LimitStartPagination<ThingsTodoListResponse>>
      *
      * @throws APIException
      */
