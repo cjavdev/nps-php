@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\Topics;
+namespace Nps\Amenities;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
@@ -10,24 +10,25 @@ use Nps\Core\Concerns\SdkParams;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @see Nps\Services\TopicsService::retrieveParks()
+ * @see Nps\Services\AmenitiesService::listParksPlaces()
  *
- * @phpstan-type TopicRetrieveParksParamsShape = array{
+ * @phpstan-type AmenityListParksPlacesParamsShape = array{
  *   id?: list<string>|null,
  *   limit?: int|null,
+ *   parkCode?: list<string>|null,
  *   q?: string|null,
  *   sort?: string|null,
  *   start?: int|null,
  * }
  */
-final class TopicRetrieveParksParams implements BaseModel
+final class AmenityListParksPlacesParams implements BaseModel
 {
-    /** @use SdkModel<TopicRetrieveParksParamsShape> */
+    /** @use SdkModel<AmenityListParksPlacesParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
-     * A comma delimited list of topic IDs.
+     * A comma delimited list of amenity IDs.
      *
      * @var list<string>|null $id
      */
@@ -41,13 +42,21 @@ final class TopicRetrieveParksParams implements BaseModel
     public ?int $limit;
 
     /**
+     * A comma delimited list of 4 character park codes.
+     *
+     * @var list<string>|null $parkCode
+     */
+    #[Optional(list: 'string')]
+    public ?array $parkCode;
+
+    /**
      * A string to search for.
      */
     #[Optional]
     public ?string $q;
 
     /**
-     * A comma delimited list of fields to sort the results by. Ascending order is assumed for each field unless the field name is prefixed with the unary negative which implies descending order.
+     * A comma delimited list of fields to sort the results by. Ascending order is assumed for each field unless the field name is prefixed with the unary negative       which implies descending order.
      */
     #[Optional]
     public ?string $sort;
@@ -69,10 +78,12 @@ final class TopicRetrieveParksParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $id
+     * @param list<string>|null $parkCode
      */
     public static function with(
         ?array $id = null,
         ?int $limit = null,
+        ?array $parkCode = null,
         ?string $q = null,
         ?string $sort = null,
         ?int $start = null,
@@ -81,6 +92,7 @@ final class TopicRetrieveParksParams implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $limit && $self['limit'] = $limit;
+        null !== $parkCode && $self['parkCode'] = $parkCode;
         null !== $q && $self['q'] = $q;
         null !== $sort && $self['sort'] = $sort;
         null !== $start && $self['start'] = $start;
@@ -89,7 +101,7 @@ final class TopicRetrieveParksParams implements BaseModel
     }
 
     /**
-     * A comma delimited list of topic IDs.
+     * A comma delimited list of amenity IDs.
      *
      * @param list<string> $id
      */
@@ -113,6 +125,19 @@ final class TopicRetrieveParksParams implements BaseModel
     }
 
     /**
+     * A comma delimited list of 4 character park codes.
+     *
+     * @param list<string> $parkCode
+     */
+    public function withParkCode(array $parkCode): self
+    {
+        $self = clone $this;
+        $self['parkCode'] = $parkCode;
+
+        return $self;
+    }
+
+    /**
      * A string to search for.
      */
     public function withQ(string $q): self
@@ -124,7 +149,7 @@ final class TopicRetrieveParksParams implements BaseModel
     }
 
     /**
-     * A comma delimited list of fields to sort the results by. Ascending order is assumed for each field unless the field name is prefixed with the unary negative which implies descending order.
+     * A comma delimited list of fields to sort the results by. Ascending order is assumed for each field unless the field name is prefixed with the unary negative       which implies descending order.
      */
     public function withSort(string $sort): self
     {

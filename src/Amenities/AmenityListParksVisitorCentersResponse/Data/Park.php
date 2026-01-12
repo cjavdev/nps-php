@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Nps\Amenities\AmenityGetParksVisitorCentersResponse\Data\Data;
+namespace Nps\Amenities\AmenityListParksVisitorCentersResponse\Data;
 
-use Nps\Amenities\AmenityGetParksVisitorCentersResponse\Data\Data\Park\Visitorcenter;
+use Nps\Amenities\AmenityListParksVisitorCentersResponse\Data\Park\Visitorcenter;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type VisitorcenterShape from \Nps\Amenities\AmenityGetParksVisitorCentersResponse\Data\Data\Park\Visitorcenter
+ * @phpstan-import-type VisitorcenterShape from \Nps\Amenities\AmenityListParksVisitorCentersResponse\Data\Park\Visitorcenter
  *
  * @phpstan-type ParkShape = array{
  *   designation?: string|null,

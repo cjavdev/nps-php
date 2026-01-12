@@ -10,7 +10,7 @@ use Nps\Core\Util;
 use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\TopicsContract;
-use Nps\Topics\TopicGetParksResponse;
+use Nps\Topics\TopicListParksResponse;
 use Nps\Topics\TopicListResponse;
 
 /**
@@ -79,16 +79,18 @@ final class TopicsService implements TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<TopicListParksResponse>
+     *
      * @throws APIException
      */
-    public function retrieveParks(
+    public function listParks(
         ?array $id = null,
         ?int $limit = null,
         ?string $q = null,
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TopicGetParksResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -100,7 +102,7 @@ final class TopicsService implements TopicsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveParks(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->listParks(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

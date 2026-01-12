@@ -2,18 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Nps\Topics\TopicGetParksResponse\Data\Data;
+namespace Nps\Amenities\AmenityListParksPlacesResponse\Data;
 
+use Nps\Amenities\AmenityListParksPlacesResponse\Data\Park\Place;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type PlaceShape from \Nps\Amenities\AmenityListParksPlacesResponse\Data\Park\Place
+ *
  * @phpstan-type ParkShape = array{
  *   designation?: string|null,
  *   fullName?: string|null,
  *   name?: string|null,
  *   parkCode?: string|null,
+ *   places?: list<Place|PlaceShape>|null,
  *   states?: string|null,
  *   url?: string|null,
  * }
@@ -26,9 +30,6 @@ final class Park implements BaseModel
     #[Optional]
     public ?string $designation;
 
-    /**
-     * the full name of a park.
-     */
     #[Optional]
     public ?string $fullName;
 
@@ -36,13 +37,17 @@ final class Park implements BaseModel
     public ?string $name;
 
     /**
-     * four letter alpha code for a park.
+     * four letter parkCode.
      */
     #[Optional]
     public ?string $parkCode;
 
+    /** @var list<Place>|null $places */
+    #[Optional(list: Place::class)]
+    public ?array $places;
+
     /**
-     * a comma delimeted list of two letter state codes.
+     * one or more comma separated state codes.
      */
     #[Optional]
     public ?string $states;
@@ -59,12 +64,15 @@ final class Park implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<Place|PlaceShape>|null $places
      */
     public static function with(
         ?string $designation = null,
         ?string $fullName = null,
         ?string $name = null,
         ?string $parkCode = null,
+        ?array $places = null,
         ?string $states = null,
         ?string $url = null,
     ): self {
@@ -74,6 +82,7 @@ final class Park implements BaseModel
         null !== $fullName && $self['fullName'] = $fullName;
         null !== $name && $self['name'] = $name;
         null !== $parkCode && $self['parkCode'] = $parkCode;
+        null !== $places && $self['places'] = $places;
         null !== $states && $self['states'] = $states;
         null !== $url && $self['url'] = $url;
 
@@ -88,9 +97,6 @@ final class Park implements BaseModel
         return $self;
     }
 
-    /**
-     * the full name of a park.
-     */
     public function withFullName(string $fullName): self
     {
         $self = clone $this;
@@ -108,7 +114,7 @@ final class Park implements BaseModel
     }
 
     /**
-     * four letter alpha code for a park.
+     * four letter parkCode.
      */
     public function withParkCode(string $parkCode): self
     {
@@ -119,7 +125,18 @@ final class Park implements BaseModel
     }
 
     /**
-     * a comma delimeted list of two letter state codes.
+     * @param list<Place|PlaceShape> $places
+     */
+    public function withPlaces(array $places): self
+    {
+        $self = clone $this;
+        $self['places'] = $places;
+
+        return $self;
+    }
+
+    /**
+     * one or more comma separated state codes.
      */
     public function withStates(string $states): self
     {

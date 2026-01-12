@@ -8,10 +8,10 @@ use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\LimitStartPagination;
 use Nps\RequestOptions;
-use Nps\Topics\TopicGetParksResponse;
 use Nps\Topics\TopicListParams;
+use Nps\Topics\TopicListParksParams;
+use Nps\Topics\TopicListParksResponse;
 use Nps\Topics\TopicListResponse;
-use Nps\Topics\TopicRetrieveParksParams;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -36,15 +36,15 @@ interface TopicsRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|TopicRetrieveParksParams $params
+     * @param array<string,mixed>|TopicListParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TopicGetParksResponse>
+     * @return BaseResponse<LimitStartPagination<TopicListParksResponse>>
      *
      * @throws APIException
      */
-    public function retrieveParks(
-        array|TopicRetrieveParksParams $params,
+    public function listParks(
+        array|TopicListParksParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

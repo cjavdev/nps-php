@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Nps\Amenities\AmenityGetParksPlacesResponse\Data;
+namespace Nps\Amenities\AmenityListParksVisitorCentersResponse;
 
-use Nps\Amenities\AmenityGetParksPlacesResponse\Data\Data\Park;
+use Nps\Amenities\AmenityListParksVisitorCentersResponse\Data\Park;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type ParkShape from \Nps\Amenities\AmenityGetParksPlacesResponse\Data\Data\Park
+ * @phpstan-import-type ParkShape from \Nps\Amenities\AmenityListParksVisitorCentersResponse\Data\Park
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null, name?: string|null, parks?: list<Park|ParkShape>|null
@@ -28,7 +28,7 @@ final class Data implements BaseModel
     public ?string $id;
 
     /**
-     * Name of the amenity.
+     * The name for this amenity.
      */
     #[Optional]
     public ?string $name;
@@ -75,7 +75,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Name of the amenity.
+     * The name for this amenity.
      */
     public function withName(string $name): self
     {

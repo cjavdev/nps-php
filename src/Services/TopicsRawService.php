@@ -10,10 +10,10 @@ use Nps\Core\Exceptions\APIException;
 use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\TopicsRawContract;
-use Nps\Topics\TopicGetParksResponse;
 use Nps\Topics\TopicListParams;
+use Nps\Topics\TopicListParksParams;
+use Nps\Topics\TopicListParksResponse;
 use Nps\Topics\TopicListResponse;
-use Nps\Topics\TopicRetrieveParksParams;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -63,18 +63,18 @@ final class TopicsRawService implements TopicsRawContract
      *
      * @param array{
      *   id?: list<string>, limit?: int, q?: string, sort?: string, start?: int
-     * }|TopicRetrieveParksParams $params
+     * }|TopicListParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TopicGetParksResponse>
+     * @return BaseResponse<LimitStartPagination<TopicListParksResponse>>
      *
      * @throws APIException
      */
-    public function retrieveParks(
-        array|TopicRetrieveParksParams $params,
+    public function listParks(
+        array|TopicListParksParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = TopicRetrieveParksParams::parseRequest(
+        [$parsed, $options] = TopicListParksParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -85,7 +85,8 @@ final class TopicsRawService implements TopicsRawContract
             path: 'topics/parks',
             query: $parsed,
             options: $options,
-            convert: TopicGetParksResponse::class,
+            convert: TopicListParksResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }
