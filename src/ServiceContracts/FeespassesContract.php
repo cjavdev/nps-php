@@ -6,6 +6,7 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
 use Nps\Feespasses\FeespassListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -24,6 +25,8 @@ interface FeespassesContract
      * @param list<string> $statecode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<FeespassListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -34,5 +37,5 @@ interface FeespassesContract
         ?int $start = null,
         ?array $statecode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): FeespassListResponse;
+    ): LimitStartPagination;
 }

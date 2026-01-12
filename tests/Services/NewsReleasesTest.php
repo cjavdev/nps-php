@@ -3,6 +3,7 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\LimitStartPagination;
 use Nps\NewsReleases\NewsReleaseListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -34,9 +35,14 @@ final class NewsReleasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->newsReleases->list();
+        $page = $this->client->newsReleases->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NewsReleaseListResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NewsReleaseListResponse::class, $item);
+        }
     }
 }

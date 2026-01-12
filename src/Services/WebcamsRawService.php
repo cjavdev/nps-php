@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\WebcamsRawContract;
 use Nps\Webcams\WebcamListParams;
@@ -36,7 +37,7 @@ final class WebcamsRawService implements WebcamsRawContract
      * }|WebcamListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<WebcamListResponse>
+     * @return BaseResponse<LimitStartPagination<WebcamListResponse>>
      *
      * @throws APIException
      */
@@ -56,6 +57,7 @@ final class WebcamsRawService implements WebcamsRawContract
             query: $parsed,
             options: $options,
             convert: WebcamListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

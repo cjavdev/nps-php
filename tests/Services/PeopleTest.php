@@ -3,6 +3,7 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\LimitStartPagination;
 use Nps\People\PersonListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -34,9 +35,14 @@ final class PeopleTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->people->list();
+        $page = $this->client->people->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PersonListResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PersonListResponse::class, $item);
+        }
     }
 }

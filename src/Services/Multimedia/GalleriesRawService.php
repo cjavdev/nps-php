@@ -8,6 +8,7 @@ use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\Galleries\GalleryListAssetsParams;
 use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
 use Nps\Multimedia\Galleries\GalleryListParams;
@@ -38,7 +39,7 @@ final class GalleriesRawService implements GalleriesRawContract
      * }|GalleryListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<GalleryListResponse>
+     * @return BaseResponse<LimitStartPagination<GalleryListResponse>>
      *
      * @throws APIException
      */
@@ -58,6 +59,7 @@ final class GalleriesRawService implements GalleriesRawContract
             query: $parsed,
             options: $options,
             convert: GalleryListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 
@@ -75,7 +77,7 @@ final class GalleriesRawService implements GalleriesRawContract
      * }|GalleryListAssetsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<GalleryListAssetsResponse>
+     * @return BaseResponse<LimitStartPagination<GalleryListAssetsResponse>>
      *
      * @throws APIException
      */
@@ -95,6 +97,7 @@ final class GalleriesRawService implements GalleriesRawContract
             query: Util::array_transform_keys($parsed, ['galleryID' => 'galleryId']),
             options: $options,
             convert: GalleryListAssetsResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

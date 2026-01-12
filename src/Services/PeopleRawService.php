@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\People\PersonListParams;
 use Nps\People\PersonListResponse;
 use Nps\RequestOptions;
@@ -35,7 +36,7 @@ final class PeopleRawService implements PeopleRawContract
      * }|PersonListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PersonListResponse>
+     * @return BaseResponse<LimitStartPagination<PersonListResponse>>
      *
      * @throws APIException
      */
@@ -55,6 +56,7 @@ final class PeopleRawService implements PeopleRawContract
             query: $parsed,
             options: $options,
             convert: PersonListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

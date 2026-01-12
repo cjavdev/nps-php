@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\WebcamsContract;
 use Nps\Webcams\WebcamListResponse;
@@ -40,6 +41,8 @@ final class WebcamsService implements WebcamsContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<WebcamListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +53,7 @@ final class WebcamsService implements WebcamsContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): WebcamListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'id' => $id,

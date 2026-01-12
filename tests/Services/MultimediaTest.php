@@ -3,6 +3,7 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\MultimediaListAudioResponse;
 use Nps\Multimedia\MultimediaListVideosResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
@@ -35,10 +36,15 @@ final class MultimediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->multimedia->listAudio();
+        $page = $this->client->multimedia->listAudio();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MultimediaListAudioResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MultimediaListAudioResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -48,9 +54,14 @@ final class MultimediaTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->multimedia->listVideos();
+        $page = $this->client->multimedia->listVideos();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MultimediaListVideosResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MultimediaListVideosResponse::class, $item);
+        }
     }
 }

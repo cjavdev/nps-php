@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts\Multimedia;
 
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
 use Nps\Multimedia\Galleries\GalleryListResponse;
 use Nps\RequestOptions;
@@ -24,6 +25,8 @@ interface GalleriesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<GalleryListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -33,7 +36,7 @@ interface GalleriesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): GalleryListResponse;
+    ): LimitStartPagination;
 
     /**
      * @api
@@ -47,6 +50,8 @@ interface GalleriesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<GalleryListAssetsResponse>
+     *
      * @throws APIException
      */
     public function listAssets(
@@ -58,5 +63,5 @@ interface GalleriesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): GalleryListAssetsResponse;
+    ): LimitStartPagination;
 }

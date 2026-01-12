@@ -7,15 +7,26 @@ namespace Nps\Multimedia\Galleries\GalleryListResponse;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
+use Nps\Multimedia\Galleries\GalleryListResponse\Data\ConstraintsInfo;
+use Nps\Multimedia\Galleries\GalleryListResponse\Data\Image;
+use Nps\Multimedia\Galleries\GalleryListResponse\Data\RelatedPark;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Multimedia\Galleries\GalleryListResponse\Data\Data as DataShape1
+ * @phpstan-import-type ConstraintsInfoShape from \Nps\Multimedia\Galleries\GalleryListResponse\Data\ConstraintsInfo
+ * @phpstan-import-type ImageShape from \Nps\Multimedia\Galleries\GalleryListResponse\Data\Image
+ * @phpstan-import-type RelatedParkShape from \Nps\Multimedia\Galleries\GalleryListResponse\Data\RelatedPark
  *
  * @phpstan-type DataShape = array{
- *   data?: list<\Nps\Multimedia\Galleries\GalleryListResponse\Data\Data|DataShape1>|null,
- *   limit?: string|null,
- *   start?: string|null,
- *   total?: string|null,
+ *   id?: string|null,
+ *   assetCount?: string|null,
+ *   constraintsInfo?: null|ConstraintsInfo|ConstraintsInfoShape,
+ *   copyright?: string|null,
+ *   description?: string|null,
+ *   images?: list<Image|ImageShape>|null,
+ *   relatedParks?: list<RelatedPark|RelatedParkShape>|null,
+ *   tags?: list<string>|null,
+ *   title?: string|null,
+ *   url?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -23,20 +34,38 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<Data\Data>|null $data */
-    #[Optional(
-        list: Data\Data::class
-    )]
-    public ?array $data;
+    #[Optional]
+    public ?string $id;
 
     #[Optional]
-    public ?string $limit;
+    public ?string $assetCount;
 
     #[Optional]
-    public ?string $start;
+    public ?ConstraintsInfo $constraintsInfo;
 
     #[Optional]
-    public ?string $total;
+    public ?string $copyright;
+
+    #[Optional]
+    public ?string $description;
+
+    /** @var list<Image>|null $images */
+    #[Optional(list: Image::class)]
+    public ?array $images;
+
+    /** @var list<RelatedPark>|null $relatedParks */
+    #[Optional(list: RelatedPark::class)]
+    public ?array $relatedParks;
+
+    /** @var list<string>|null $tags */
+    #[Optional(list: 'string')]
+    public ?array $tags;
+
+    #[Optional]
+    public ?string $title;
+
+    #[Optional]
+    public ?string $url;
 
     public function __construct()
     {
@@ -48,55 +77,128 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data\Data|DataShape1>|null $data
+     * @param ConstraintsInfo|ConstraintsInfoShape|null $constraintsInfo
+     * @param list<Image|ImageShape>|null $images
+     * @param list<RelatedPark|RelatedParkShape>|null $relatedParks
+     * @param list<string>|null $tags
      */
     public static function with(
-        ?array $data = null,
-        ?string $limit = null,
-        ?string $start = null,
-        ?string $total = null,
+        ?string $id = null,
+        ?string $assetCount = null,
+        ConstraintsInfo|array|null $constraintsInfo = null,
+        ?string $copyright = null,
+        ?string $description = null,
+        ?array $images = null,
+        ?array $relatedParks = null,
+        ?array $tags = null,
+        ?string $title = null,
+        ?string $url = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $limit && $self['limit'] = $limit;
-        null !== $start && $self['start'] = $start;
-        null !== $total && $self['total'] = $total;
+        null !== $id && $self['id'] = $id;
+        null !== $assetCount && $self['assetCount'] = $assetCount;
+        null !== $constraintsInfo && $self['constraintsInfo'] = $constraintsInfo;
+        null !== $copyright && $self['copyright'] = $copyright;
+        null !== $description && $self['description'] = $description;
+        null !== $images && $self['images'] = $images;
+        null !== $relatedParks && $self['relatedParks'] = $relatedParks;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $title && $self['title'] = $title;
+        null !== $url && $self['url'] = $url;
+
+        return $self;
+    }
+
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
+    public function withAssetCount(string $assetCount): self
+    {
+        $self = clone $this;
+        $self['assetCount'] = $assetCount;
 
         return $self;
     }
 
     /**
-     * @param list<Data\Data|DataShape1> $data
+     * @param ConstraintsInfo|ConstraintsInfoShape $constraintsInfo
      */
-    public function withData(array $data): self
-    {
+    public function withConstraintsInfo(
+        ConstraintsInfo|array $constraintsInfo
+    ): self {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['constraintsInfo'] = $constraintsInfo;
 
         return $self;
     }
 
-    public function withLimit(string $limit): self
+    public function withCopyright(string $copyright): self
     {
         $self = clone $this;
-        $self['limit'] = $limit;
+        $self['copyright'] = $copyright;
 
         return $self;
     }
 
-    public function withStart(string $start): self
+    public function withDescription(string $description): self
     {
         $self = clone $this;
-        $self['start'] = $start;
+        $self['description'] = $description;
 
         return $self;
     }
 
-    public function withTotal(string $total): self
+    /**
+     * @param list<Image|ImageShape> $images
+     */
+    public function withImages(array $images): self
     {
         $self = clone $this;
-        $self['total'] = $total;
+        $self['images'] = $images;
+
+        return $self;
+    }
+
+    /**
+     * @param list<RelatedPark|RelatedParkShape> $relatedParks
+     */
+    public function withRelatedParks(array $relatedParks): self
+    {
+        $self = clone $this;
+        $self['relatedParks'] = $relatedParks;
+
+        return $self;
+    }
+
+    /**
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
+    }
+
+    public function withURL(string $url): self
+    {
+        $self = clone $this;
+        $self['url'] = $url;
 
         return $self;
     }

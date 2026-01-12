@@ -6,6 +6,7 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\Topics\TopicGetParksResponse;
 use Nps\Topics\TopicListParams;
@@ -23,7 +24,7 @@ interface TopicsRawContract
      * @param array<string,mixed>|TopicListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TopicListResponse>
+     * @return BaseResponse<LimitStartPagination<TopicListResponse>>
      *
      * @throws APIException
      */

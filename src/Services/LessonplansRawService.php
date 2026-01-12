@@ -9,6 +9,7 @@ use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Lessonplans\LessonplanListParams;
 use Nps\Lessonplans\LessonplanListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\LessonplansRawContract;
 
@@ -36,7 +37,7 @@ final class LessonplansRawService implements LessonplansRawContract
      * }|LessonplanListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<LessonplanListResponse>
+     * @return BaseResponse<LimitStartPagination<LessonplanListResponse>>
      *
      * @throws APIException
      */
@@ -56,6 +57,7 @@ final class LessonplansRawService implements LessonplansRawContract
             query: $parsed,
             options: $options,
             convert: LessonplanListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

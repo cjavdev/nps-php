@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\TopicsContract;
 use Nps\Topics\TopicGetParksResponse;
@@ -40,6 +41,8 @@ final class TopicsService implements TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<TopicListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -49,7 +52,7 @@ final class TopicsService implements TopicsContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TopicListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'id' => $id,

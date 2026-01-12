@@ -7,15 +7,28 @@ namespace Nps\Multimedia\Galleries\GalleryListAssetsResponse;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
+use Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\ConstraintsInfo;
+use Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\FileInfo;
+use Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\RelatedPark;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\Data as DataShape1
+ * @phpstan-import-type ConstraintsInfoShape from \Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\ConstraintsInfo
+ * @phpstan-import-type FileInfoShape from \Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\FileInfo
+ * @phpstan-import-type RelatedParkShape from \Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\RelatedPark
  *
  * @phpstan-type DataShape = array{
- *   data?: list<\Nps\Multimedia\Galleries\GalleryListAssetsResponse\Data\Data|DataShape1>|null,
- *   limit?: string|null,
- *   start?: string|null,
- *   total?: string|null,
+ *   id?: string|null,
+ *   altText?: string|null,
+ *   constraintsInfo?: null|ConstraintsInfo|ConstraintsInfoShape,
+ *   copyright?: string|null,
+ *   credit?: string|null,
+ *   description?: string|null,
+ *   fileInfo?: null|FileInfo|FileInfoShape,
+ *   ordinal?: string|null,
+ *   permalinkURL?: string|null,
+ *   relatedParks?: list<RelatedPark|RelatedParkShape>|null,
+ *   tags?: list<string>|null,
+ *   title?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -23,22 +36,43 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /**
-     * @var list<Data\Data>|null $data
-     */
-    #[Optional(
-        list: Data\Data::class
-    )]
-    public ?array $data;
+    #[Optional]
+    public ?string $id;
 
     #[Optional]
-    public ?string $limit;
+    public ?string $altText;
 
     #[Optional]
-    public ?string $start;
+    public ?ConstraintsInfo $constraintsInfo;
 
     #[Optional]
-    public ?string $total;
+    public ?string $copyright;
+
+    #[Optional]
+    public ?string $credit;
+
+    #[Optional]
+    public ?string $description;
+
+    #[Optional]
+    public ?FileInfo $fileInfo;
+
+    #[Optional]
+    public ?string $ordinal;
+
+    #[Optional('permalinkUrl')]
+    public ?string $permalinkURL;
+
+    /** @var list<RelatedPark>|null $relatedParks */
+    #[Optional(list: RelatedPark::class)]
+    public ?array $relatedParks;
+
+    /** @var list<string>|null $tags */
+    #[Optional(list: 'string')]
+    public ?array $tags;
+
+    #[Optional]
+    public ?string $title;
 
     public function __construct()
     {
@@ -50,55 +84,148 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data\Data|DataShape1>|null $data
+     * @param ConstraintsInfo|ConstraintsInfoShape|null $constraintsInfo
+     * @param FileInfo|FileInfoShape|null $fileInfo
+     * @param list<RelatedPark|RelatedParkShape>|null $relatedParks
+     * @param list<string>|null $tags
      */
     public static function with(
-        ?array $data = null,
-        ?string $limit = null,
-        ?string $start = null,
-        ?string $total = null,
+        ?string $id = null,
+        ?string $altText = null,
+        ConstraintsInfo|array|null $constraintsInfo = null,
+        ?string $copyright = null,
+        ?string $credit = null,
+        ?string $description = null,
+        FileInfo|array|null $fileInfo = null,
+        ?string $ordinal = null,
+        ?string $permalinkURL = null,
+        ?array $relatedParks = null,
+        ?array $tags = null,
+        ?string $title = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $limit && $self['limit'] = $limit;
-        null !== $start && $self['start'] = $start;
-        null !== $total && $self['total'] = $total;
+        null !== $id && $self['id'] = $id;
+        null !== $altText && $self['altText'] = $altText;
+        null !== $constraintsInfo && $self['constraintsInfo'] = $constraintsInfo;
+        null !== $copyright && $self['copyright'] = $copyright;
+        null !== $credit && $self['credit'] = $credit;
+        null !== $description && $self['description'] = $description;
+        null !== $fileInfo && $self['fileInfo'] = $fileInfo;
+        null !== $ordinal && $self['ordinal'] = $ordinal;
+        null !== $permalinkURL && $self['permalinkURL'] = $permalinkURL;
+        null !== $relatedParks && $self['relatedParks'] = $relatedParks;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $title && $self['title'] = $title;
+
+        return $self;
+    }
+
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
+    public function withAltText(string $altText): self
+    {
+        $self = clone $this;
+        $self['altText'] = $altText;
 
         return $self;
     }
 
     /**
-     * @param list<Data\Data|DataShape1> $data
+     * @param ConstraintsInfo|ConstraintsInfoShape $constraintsInfo
      */
-    public function withData(array $data): self
-    {
+    public function withConstraintsInfo(
+        ConstraintsInfo|array $constraintsInfo
+    ): self {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['constraintsInfo'] = $constraintsInfo;
 
         return $self;
     }
 
-    public function withLimit(string $limit): self
+    public function withCopyright(string $copyright): self
     {
         $self = clone $this;
-        $self['limit'] = $limit;
+        $self['copyright'] = $copyright;
 
         return $self;
     }
 
-    public function withStart(string $start): self
+    public function withCredit(string $credit): self
     {
         $self = clone $this;
-        $self['start'] = $start;
+        $self['credit'] = $credit;
 
         return $self;
     }
 
-    public function withTotal(string $total): self
+    public function withDescription(string $description): self
     {
         $self = clone $this;
-        $self['total'] = $total;
+        $self['description'] = $description;
+
+        return $self;
+    }
+
+    /**
+     * @param FileInfo|FileInfoShape $fileInfo
+     */
+    public function withFileInfo(FileInfo|array $fileInfo): self
+    {
+        $self = clone $this;
+        $self['fileInfo'] = $fileInfo;
+
+        return $self;
+    }
+
+    public function withOrdinal(string $ordinal): self
+    {
+        $self = clone $this;
+        $self['ordinal'] = $ordinal;
+
+        return $self;
+    }
+
+    public function withPermalinkURL(string $permalinkURL): self
+    {
+        $self = clone $this;
+        $self['permalinkURL'] = $permalinkURL;
+
+        return $self;
+    }
+
+    /**
+     * @param list<RelatedPark|RelatedParkShape> $relatedParks
+     */
+    public function withRelatedParks(array $relatedParks): self
+    {
+        $self = clone $this;
+        $self['relatedParks'] = $relatedParks;
+
+        return $self;
+    }
+
+    /**
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
 
         return $self;
     }

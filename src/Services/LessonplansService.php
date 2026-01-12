@@ -8,6 +8,7 @@ use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
 use Nps\Lessonplans\LessonplanListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\LessonplansContract;
 
@@ -40,6 +41,8 @@ final class LessonplansService implements LessonplansContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<LessonplanListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +53,7 @@ final class LessonplansService implements LessonplansContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): LessonplanListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\NewsReleases\NewsReleaseListParams;
 use Nps\NewsReleases\NewsReleaseListResponse;
 use Nps\RequestOptions;
@@ -36,7 +37,7 @@ final class NewsReleasesRawService implements NewsReleasesRawContract
      * }|NewsReleaseListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<NewsReleaseListResponse>
+     * @return BaseResponse<LimitStartPagination<NewsReleaseListResponse>>
      *
      * @throws APIException
      */
@@ -56,6 +57,7 @@ final class NewsReleasesRawService implements NewsReleasesRawContract
             query: $parsed,
             options: $options,
             convert: NewsReleaseListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }
