@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ThingsTodoRawContract;
 use Nps\ThingsTodo\ThingsTodoListParams;
@@ -32,12 +33,12 @@ final class ThingsTodoRawService implements ThingsTodoRawContract
      *   parkCode?: string,
      *   q?: string,
      *   sort?: list<string>,
-     *   start?: string,
+     *   start?: int,
      *   stateCode?: string,
      * }|ThingsTodoListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ThingsTodoListResponse>
+     * @return BaseResponse<LimitStartPagination<ThingsTodoListResponse>>
      *
      * @throws APIException
      */
@@ -57,6 +58,7 @@ final class ThingsTodoRawService implements ThingsTodoRawContract
             query: $parsed,
             options: $options,
             convert: ThingsTodoListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

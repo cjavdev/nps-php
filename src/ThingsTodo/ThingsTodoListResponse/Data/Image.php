@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Nps\ThingsTodo\ThingsTodoListResponse\Data\Data;
+namespace Nps\ThingsTodo\ThingsTodoListResponse\Data;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
-use Nps\ThingsTodo\ThingsTodoListResponse\Data\Data\Image\Crop;
+use Nps\ThingsTodo\ThingsTodoListResponse\Data\Image\Crop;
 
 /**
- * @phpstan-import-type CropShape from \Nps\ThingsTodo\ThingsTodoListResponse\Data\Data\Image\Crop
+ * @phpstan-import-type CropShape from \Nps\ThingsTodo\ThingsTodoListResponse\Data\Image\Crop
  *
  * @phpstan-type ImageShape = array{
  *   altText?: string|null,

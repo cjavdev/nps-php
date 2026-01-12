@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\ThingsTodo\ThingsTodoListResponse\Data\Data;
+namespace Nps\ThingsTodo\ThingsTodoListResponse\Data;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;

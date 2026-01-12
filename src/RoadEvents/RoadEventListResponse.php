@@ -7,16 +7,17 @@ namespace Nps\RoadEvents;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
-use Nps\RoadEvents\RoadEventListResponse\Data;
+use Nps\RoadEvents\RoadEventListResponse\Feature;
+use Nps\RoadEvents\RoadEventListResponse\RoadEventFeedInfo;
 
 /**
- * @phpstan-import-type DataShape from \Nps\RoadEvents\RoadEventListResponse\Data
+ * @phpstan-import-type FeatureShape from \Nps\RoadEvents\RoadEventListResponse\Feature
+ * @phpstan-import-type RoadEventFeedInfoShape from \Nps\RoadEvents\RoadEventListResponse\RoadEventFeedInfo
  *
  * @phpstan-type RoadEventListResponseShape = array{
- *   data?: list<Data|DataShape>|null,
- *   limit?: float|null,
- *   start?: float|null,
- *   total?: float|null,
+ *   features?: list<Feature|FeatureShape>|null,
+ *   roadEventFeedInfo?: null|RoadEventFeedInfo|RoadEventFeedInfoShape,
+ *   type?: string|null,
  * }
  */
 final class RoadEventListResponse implements BaseModel
@@ -24,18 +25,15 @@ final class RoadEventListResponse implements BaseModel
     /** @use SdkModel<RoadEventListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
-    public ?array $data;
+    /** @var list<Feature>|null $features */
+    #[Optional(list: Feature::class)]
+    public ?array $features;
+
+    #[Optional('road_event_feed_info')]
+    public ?RoadEventFeedInfo $roadEventFeedInfo;
 
     #[Optional]
-    public ?float $limit;
-
-    #[Optional]
-    public ?float $start;
-
-    #[Optional]
-    public ?float $total;
+    public ?string $type;
 
     public function __construct()
     {
@@ -47,55 +45,50 @@ final class RoadEventListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape>|null $data
+     * @param list<Feature|FeatureShape>|null $features
+     * @param RoadEventFeedInfo|RoadEventFeedInfoShape|null $roadEventFeedInfo
      */
     public static function with(
-        ?array $data = null,
-        ?float $limit = null,
-        ?float $start = null,
-        ?float $total = null,
+        ?array $features = null,
+        RoadEventFeedInfo|array|null $roadEventFeedInfo = null,
+        ?string $type = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $limit && $self['limit'] = $limit;
-        null !== $start && $self['start'] = $start;
-        null !== $total && $self['total'] = $total;
+        null !== $features && $self['features'] = $features;
+        null !== $roadEventFeedInfo && $self['roadEventFeedInfo'] = $roadEventFeedInfo;
+        null !== $type && $self['type'] = $type;
 
         return $self;
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<Feature|FeatureShape> $features
      */
-    public function withData(array $data): self
+    public function withFeatures(array $features): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['features'] = $features;
 
         return $self;
     }
 
-    public function withLimit(float $limit): self
-    {
+    /**
+     * @param RoadEventFeedInfo|RoadEventFeedInfoShape $roadEventFeedInfo
+     */
+    public function withRoadEventFeedInfo(
+        RoadEventFeedInfo|array $roadEventFeedInfo
+    ): self {
         $self = clone $this;
-        $self['limit'] = $limit;
+        $self['roadEventFeedInfo'] = $roadEventFeedInfo;
 
         return $self;
     }
 
-    public function withStart(float $start): self
+    public function withType(string $type): self
     {
         $self = clone $this;
-        $self['start'] = $start;
-
-        return $self;
-    }
-
-    public function withTotal(float $total): self
-    {
-        $self = clone $this;
-        $self['total'] = $total;
+        $self['type'] = $type;
 
         return $self;
     }

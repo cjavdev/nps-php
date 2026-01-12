@@ -18,12 +18,14 @@ use Nps\Core\Contracts\BaseModel;
  *   dateStart?: string|null,
  *   eventType?: list<string>|null,
  *   expandRecurring?: bool|null,
+ *   limit?: int|null,
  *   organization?: list<string>|null,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  *   parkCode?: list<string>|null,
  *   portal?: list<string>|null,
  *   q?: string|null,
+ *   start?: int|null,
  *   stateCode?: list<string>|null,
  *   subject?: list<string>|null,
  *   tagsAll?: list<string>|null,
@@ -70,6 +72,12 @@ final class EventListParams implements BaseModel
     public ?bool $expandRecurring;
 
     /**
+     * Number of results to return per request. Default is 50.
+     */
+    #[Optional]
+    public ?int $limit;
+
+    /**
      * A comma delimited list of organization site codes.
      *
      * @var list<string>|null $organization
@@ -110,6 +118,12 @@ final class EventListParams implements BaseModel
      */
     #[Optional]
     public ?string $q;
+
+    /**
+     * Number of results to return per request. Default is 50.
+     */
+    #[Optional]
+    public ?int $start;
 
     /**
      * A comma delimited list of 2 character state codes.
@@ -177,12 +191,14 @@ final class EventListParams implements BaseModel
         ?string $dateStart = null,
         ?array $eventType = null,
         ?bool $expandRecurring = null,
+        ?int $limit = null,
         ?array $organization = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?array $parkCode = null,
         ?array $portal = null,
         ?string $q = null,
+        ?int $start = null,
         ?array $stateCode = null,
         ?array $subject = null,
         ?array $tagsAll = null,
@@ -196,12 +212,14 @@ final class EventListParams implements BaseModel
         null !== $dateStart && $self['dateStart'] = $dateStart;
         null !== $eventType && $self['eventType'] = $eventType;
         null !== $expandRecurring && $self['expandRecurring'] = $expandRecurring;
+        null !== $limit && $self['limit'] = $limit;
         null !== $organization && $self['organization'] = $organization;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $parkCode && $self['parkCode'] = $parkCode;
         null !== $portal && $self['portal'] = $portal;
         null !== $q && $self['q'] = $q;
+        null !== $start && $self['start'] = $start;
         null !== $stateCode && $self['stateCode'] = $stateCode;
         null !== $subject && $self['subject'] = $subject;
         null !== $tagsAll && $self['tagsAll'] = $tagsAll;
@@ -264,6 +282,17 @@ final class EventListParams implements BaseModel
     {
         $self = clone $this;
         $self['expandRecurring'] = $expandRecurring;
+
+        return $self;
+    }
+
+    /**
+     * Number of results to return per request. Default is 50.
+     */
+    public function withLimit(int $limit): self
+    {
+        $self = clone $this;
+        $self['limit'] = $limit;
 
         return $self;
     }
@@ -336,6 +365,17 @@ final class EventListParams implements BaseModel
     {
         $self = clone $this;
         $self['q'] = $q;
+
+        return $self;
+    }
+
+    /**
+     * Number of results to return per request. Default is 50.
+     */
+    public function withStart(int $start): self
+    {
+        $self = clone $this;
+        $self['start'] = $start;
 
         return $self;
     }

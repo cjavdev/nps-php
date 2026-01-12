@@ -9,6 +9,7 @@ use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Events\EventListParams;
 use Nps\Events\EventListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\EventsRawContract;
 
@@ -32,12 +33,14 @@ final class EventsRawService implements EventsRawContract
      *   dateStart?: string,
      *   eventType?: list<string>,
      *   expandRecurring?: bool,
+     *   limit?: int,
      *   organization?: list<string>,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   parkCode?: list<string>,
      *   portal?: list<string>,
      *   q?: string,
+     *   start?: int,
      *   stateCode?: list<string>,
      *   subject?: list<string>,
      *   tagsAll?: list<string>,
@@ -46,7 +49,7 @@ final class EventsRawService implements EventsRawContract
      * }|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EventListResponse>
+     * @return BaseResponse<LimitStartPagination<EventListResponse>>
      *
      * @throws APIException
      */
@@ -66,6 +69,7 @@ final class EventsRawService implements EventsRawContract
             query: $parsed,
             options: $options,
             convert: EventListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

@@ -18,7 +18,7 @@ use Nps\Core\Contracts\BaseModel;
  *   parkCode?: string|null,
  *   q?: string|null,
  *   sort?: list<string>|null,
- *   start?: string|null,
+ *   start?: int|null,
  *   stateCode?: string|null,
  * }
  */
@@ -64,7 +64,7 @@ final class ThingsTodoListParams implements BaseModel
      * Get the next [limit] results starting with this number. Default is 0.
      */
     #[Optional]
-    public ?string $start;
+    public ?int $start;
 
     /**
      * A comma delimited list of 2 character state codes.
@@ -90,7 +90,7 @@ final class ThingsTodoListParams implements BaseModel
         ?string $parkCode = null,
         ?string $q = null,
         ?array $sort = null,
-        ?string $start = null,
+        ?int $start = null,
         ?string $stateCode = null,
     ): self {
         $self = new self;
@@ -166,7 +166,7 @@ final class ThingsTodoListParams implements BaseModel
     /**
      * Get the next [limit] results starting with this number. Default is 0.
      */
-    public function withStart(string $start): self
+    public function withStart(int $start): self
     {
         $self = clone $this;
         $self['start'] = $start;

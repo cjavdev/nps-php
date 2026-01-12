@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\RoadEvents\RoadEventListParams;
 use Nps\RoadEvents\RoadEventListResponse;
@@ -26,10 +27,12 @@ final class RoadEventsRawService implements RoadEventsRawContract
     /**
      * @api
      *
-     * @param array{parkCode?: string, type?: string}|RoadEventListParams $params
+     * @param array{
+     *   limit?: int, parkCode?: string, start?: int, type?: string
+     * }|RoadEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RoadEventListResponse>
+     * @return BaseResponse<LimitStartPagination<RoadEventListResponse>>
      *
      * @throws APIException
      */
@@ -49,6 +52,7 @@ final class RoadEventsRawService implements RoadEventsRawContract
             query: $parsed,
             options: $options,
             convert: RoadEventListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

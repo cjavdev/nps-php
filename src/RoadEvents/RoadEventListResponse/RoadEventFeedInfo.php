@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Nps\RoadEvents\RoadEventListResponse\Data;
+namespace Nps\RoadEvents\RoadEventListResponse;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
-use Nps\RoadEvents\RoadEventListResponse\Data\RoadEventFeedInfo\DataSource;
+use Nps\RoadEvents\RoadEventListResponse\RoadEventFeedInfo\DataSource;
 
 /**
- * @phpstan-import-type DataSourceShape from \Nps\RoadEvents\RoadEventListResponse\Data\RoadEventFeedInfo\DataSource
+ * @phpstan-import-type DataSourceShape from \Nps\RoadEvents\RoadEventListResponse\RoadEventFeedInfo\DataSource
  *
  * @phpstan-type RoadEventFeedInfoShape = array{
  *   id?: string|null,

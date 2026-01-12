@@ -3,6 +3,7 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\LimitStartPagination;
 use Nps\ThingsTodo\ThingsTodoListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -34,9 +35,14 @@ final class ThingsTodoTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->thingsTodo->list();
+        $page = $this->client->thingsTodo->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ThingsTodoListResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ThingsTodoListResponse::class, $item);
+        }
     }
 }
