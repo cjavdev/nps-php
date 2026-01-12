@@ -24,7 +24,7 @@ interface ActivitiesRawContract
      * @param array<string,mixed>|ActivityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActivityListResponse>
+     * @return BaseResponse<LimitStartPagination<ActivityListResponse>>
      *
      * @throws APIException
      */

@@ -30,11 +30,11 @@ final class ActivitiesRawService implements ActivitiesRawContract
      * @api
      *
      * @param array{
-     *   id?: string, limit?: string, q?: string, sort?: string, start?: int
+     *   id?: string, limit?: int, q?: string, sort?: string, start?: int
      * }|ActivityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActivityListResponse>
+     * @return BaseResponse<LimitStartPagination<ActivityListResponse>>
      *
      * @throws APIException
      */
@@ -54,6 +54,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
             query: $parsed,
             options: $options,
             convert: ActivityListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 
