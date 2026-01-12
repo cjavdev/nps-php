@@ -10,9 +10,9 @@ use Nps\Core\Concerns\SdkParams;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @see Nps\Services\AmenitiesService::retrieveParksVisitorCenters()
+ * @see Nps\Services\AmenitiesService::listParksVisitorCenters()
  *
- * @phpstan-type AmenityRetrieveParksVisitorCentersParamsShape = array{
+ * @phpstan-type AmenityListParksVisitorCentersParamsShape = array{
  *   id?: string|null,
  *   limit?: int|null,
  *   parkCode?: string|null,
@@ -21,9 +21,9 @@ use Nps\Core\Contracts\BaseModel;
  *   start?: int|null,
  * }
  */
-final class AmenityRetrieveParksVisitorCentersParams implements BaseModel
+final class AmenityListParksVisitorCentersParams implements BaseModel
 {
-    /** @use SdkModel<AmenityRetrieveParksVisitorCentersParamsShape> */
+    /** @use SdkModel<AmenityListParksVisitorCentersParamsShape> */
     use SdkModel;
     use SdkParams;
 

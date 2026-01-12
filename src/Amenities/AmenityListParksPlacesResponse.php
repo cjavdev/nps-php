@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Nps\Amenities;
 
-use Nps\Amenities\AmenityGetParksVisitorCentersResponse\Data;
+use Nps\Amenities\AmenityListParksPlacesResponse\Data;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Amenities\AmenityGetParksVisitorCentersResponse\Data
+ * @phpstan-import-type DataShape from \Nps\Amenities\AmenityListParksPlacesResponse\Data
  *
- * @phpstan-type AmenityGetParksVisitorCentersResponseShape = array{
+ * @phpstan-type AmenityListParksPlacesResponseShape = array{
  *   data?: list<Data|DataShape>|null,
- *   limit?: float|null,
- *   start?: float|null,
- *   total?: float|null,
+ *   limit?: string|null,
+ *   start?: string|null,
+ *   total?: string|null,
  * }
  */
-final class AmenityGetParksVisitorCentersResponse implements BaseModel
+final class AmenityListParksPlacesResponse implements BaseModel
 {
-    /** @use SdkModel<AmenityGetParksVisitorCentersResponseShape> */
+    /** @use SdkModel<AmenityListParksPlacesResponseShape> */
     use SdkModel;
 
     /** @var list<Data>|null $data */
@@ -29,13 +29,13 @@ final class AmenityGetParksVisitorCentersResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?float $limit;
+    public ?string $limit;
 
     #[Optional]
-    public ?float $start;
+    public ?string $start;
 
     #[Optional]
-    public ?float $total;
+    public ?string $total;
 
     public function __construct()
     {
@@ -51,9 +51,9 @@ final class AmenityGetParksVisitorCentersResponse implements BaseModel
      */
     public static function with(
         ?array $data = null,
-        ?float $limit = null,
-        ?float $start = null,
-        ?float $total = null,
+        ?string $limit = null,
+        ?string $start = null,
+        ?string $total = null,
     ): self {
         $self = new self;
 
@@ -76,7 +76,7 @@ final class AmenityGetParksVisitorCentersResponse implements BaseModel
         return $self;
     }
 
-    public function withLimit(float $limit): self
+    public function withLimit(string $limit): self
     {
         $self = clone $this;
         $self['limit'] = $limit;
@@ -84,7 +84,7 @@ final class AmenityGetParksVisitorCentersResponse implements BaseModel
         return $self;
     }
 
-    public function withStart(float $start): self
+    public function withStart(string $start): self
     {
         $self = clone $this;
         $self['start'] = $start;
@@ -92,7 +92,7 @@ final class AmenityGetParksVisitorCentersResponse implements BaseModel
         return $self;
     }
 
-    public function withTotal(float $total): self
+    public function withTotal(string $total): self
     {
         $self = clone $this;
         $self['total'] = $total;

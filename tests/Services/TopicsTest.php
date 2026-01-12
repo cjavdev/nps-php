@@ -4,7 +4,7 @@ namespace Tests\Services;
 
 use Nps\Client;
 use Nps\LimitStartPagination;
-use Nps\Topics\TopicGetParksResponse;
+use Nps\Topics\TopicListParksResponse;
 use Nps\Topics\TopicListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -48,15 +48,20 @@ final class TopicsTest extends TestCase
     }
 
     #[Test]
-    public function testRetrieveParks(): void
+    public function testListParks(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->topics->retrieveParks();
+        $page = $this->client->topics->listParks();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TopicGetParksResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(TopicListParksResponse::class, $item);
+        }
     }
 }

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Nps\ServiceContracts;
 
-use Nps\Amenities\AmenityGetParksPlacesResponse;
-use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
 use Nps\Amenities\AmenityListParams;
+use Nps\Amenities\AmenityListParksPlacesParams;
+use Nps\Amenities\AmenityListParksPlacesResponse;
+use Nps\Amenities\AmenityListParksVisitorCentersParams;
+use Nps\Amenities\AmenityListParksVisitorCentersResponse;
 use Nps\Amenities\AmenityListResponse;
-use Nps\Amenities\AmenityRetrieveParksPlacesParams;
-use Nps\Amenities\AmenityRetrieveParksVisitorCentersParams;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\LimitStartPagination;
@@ -38,30 +38,30 @@ interface AmenitiesRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|AmenityRetrieveParksPlacesParams $params
+     * @param array<string,mixed>|AmenityListParksPlacesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AmenityGetParksPlacesResponse>
+     * @return BaseResponse<LimitStartPagination<AmenityListParksPlacesResponse>>
      *
      * @throws APIException
      */
-    public function retrieveParksPlaces(
-        array|AmenityRetrieveParksPlacesParams $params,
+    public function listParksPlaces(
+        array|AmenityListParksPlacesParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param array<string,mixed>|AmenityRetrieveParksVisitorCentersParams $params
+     * @param array<string,mixed>|AmenityListParksVisitorCentersParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AmenityGetParksVisitorCentersResponse>
+     * @return BaseResponse<LimitStartPagination<AmenityListParksVisitorCentersResponse,>,>
      *
      * @throws APIException
      */
-    public function retrieveParksVisitorCenters(
-        array|AmenityRetrieveParksVisitorCentersParams $params,
+    public function listParksVisitorCenters(
+        array|AmenityListParksVisitorCentersParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

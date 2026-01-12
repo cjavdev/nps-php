@@ -2,37 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Nps\Amenities\AmenityGetParksVisitorCentersResponse\Data\Data\Park;
+namespace Nps\Amenities\AmenityListParksPlacesResponse\Data\Park;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type VisitorcenterShape = array{
- *   id?: string|null, name?: string|null, url?: string|null
+ * @phpstan-type PlaceShape = array{
+ *   id?: string|null, title?: string|null, url?: string|null
  * }
  */
-final class Visitorcenter implements BaseModel
+final class Place implements BaseModel
 {
-    /** @use SdkModel<VisitorcenterShape> */
+    /** @use SdkModel<PlaceShape> */
     use SdkModel;
 
-    /**
-     * Unique identifier for the Visitor Center.
-     */
     #[Optional]
     public ?string $id;
 
-    /**
-     * Name of the Visitor Center.
-     */
     #[Optional]
-    public ?string $name;
+    public ?string $title;
 
-    /**
-     * URL for the Visitor Center.
-     */
     #[Optional]
     public ?string $url;
 
@@ -48,21 +39,18 @@ final class Visitorcenter implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $name = null,
+        ?string $title = null,
         ?string $url = null
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $name && $self['name'] = $name;
+        null !== $title && $self['title'] = $title;
         null !== $url && $self['url'] = $url;
 
         return $self;
     }
 
-    /**
-     * Unique identifier for the Visitor Center.
-     */
     public function withID(string $id): self
     {
         $self = clone $this;
@@ -71,20 +59,14 @@ final class Visitorcenter implements BaseModel
         return $self;
     }
 
-    /**
-     * Name of the Visitor Center.
-     */
-    public function withName(string $name): self
+    public function withTitle(string $title): self
     {
         $self = clone $this;
-        $self['name'] = $name;
+        $self['title'] = $title;
 
         return $self;
     }
 
-    /**
-     * URL for the Visitor Center.
-     */
     public function withURL(string $url): self
     {
         $self = clone $this;

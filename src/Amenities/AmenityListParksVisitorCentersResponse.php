@@ -2,29 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Nps\Topics\TopicGetParksResponse;
+namespace Nps\Amenities;
 
+use Nps\Amenities\AmenityListParksVisitorCentersResponse\Data;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Topics\TopicGetParksResponse\Data\Data as DataShape1
+ * @phpstan-import-type DataShape from \Nps\Amenities\AmenityListParksVisitorCentersResponse\Data
  *
- * @phpstan-type DataShape = array{
- *   data?: list<\Nps\Topics\TopicGetParksResponse\Data\Data|DataShape1>|null,
+ * @phpstan-type AmenityListParksVisitorCentersResponseShape = array{
+ *   data?: list<Data|DataShape>|null,
  *   limit?: string|null,
  *   start?: string|null,
  *   total?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class AmenityListParksVisitorCentersResponse implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<AmenityListParksVisitorCentersResponseShape> */
     use SdkModel;
 
-    /** @var list<Data\Data>|null $data */
-    #[Optional(list: Data\Data::class)]
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     #[Optional]
@@ -46,7 +47,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data\Data|DataShape1>|null $data
+     * @param list<Data|DataShape>|null $data
      */
     public static function with(
         ?array $data = null,
@@ -65,7 +66,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<Data\Data|DataShape1> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

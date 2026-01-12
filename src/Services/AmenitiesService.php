@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Nps\Services;
 
-use Nps\Amenities\AmenityGetParksPlacesResponse;
-use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
+use Nps\Amenities\AmenityListParksPlacesResponse;
+use Nps\Amenities\AmenityListParksVisitorCentersResponse;
 use Nps\Amenities\AmenityListResponse;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
@@ -73,9 +73,11 @@ final class AmenitiesService implements AmenitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<AmenityListParksPlacesResponse>
+     *
      * @throws APIException
      */
-    public function retrieveParksPlaces(
+    public function listParksPlaces(
         ?array $id = null,
         ?int $limit = null,
         ?array $parkCode = null,
@@ -83,7 +85,7 @@ final class AmenitiesService implements AmenitiesContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AmenityGetParksPlacesResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -96,7 +98,7 @@ final class AmenitiesService implements AmenitiesContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveParksPlaces(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->listParksPlaces(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -112,9 +114,11 @@ final class AmenitiesService implements AmenitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<AmenityListParksVisitorCentersResponse>
+     *
      * @throws APIException
      */
-    public function retrieveParksVisitorCenters(
+    public function listParksVisitorCenters(
         ?string $id = null,
         ?int $limit = null,
         ?string $parkCode = null,
@@ -122,7 +126,7 @@ final class AmenitiesService implements AmenitiesContract
         ?array $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AmenityGetParksVisitorCentersResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -135,7 +139,7 @@ final class AmenitiesService implements AmenitiesContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveParksVisitorCenters(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->listParksVisitorCenters(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
