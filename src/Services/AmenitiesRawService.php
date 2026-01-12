@@ -13,6 +13,7 @@ use Nps\Amenities\AmenityRetrieveParksVisitorCentersParams;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\AmenitiesRawContract;
 
@@ -35,7 +36,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
      * }|AmenityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AmenityListResponse>
+     * @return BaseResponse<LimitStartPagination<AmenityListResponse>>
      *
      * @throws APIException
      */
@@ -55,6 +56,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
             query: $parsed,
             options: $options,
             convert: AmenityListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 

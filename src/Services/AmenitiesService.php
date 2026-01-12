@@ -10,6 +10,7 @@ use Nps\Amenities\AmenityListResponse;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\AmenitiesContract;
 
@@ -40,6 +41,8 @@ final class AmenitiesService implements AmenitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<AmenityListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -48,7 +51,7 @@ final class AmenitiesService implements AmenitiesContract
         ?string $q = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AmenityListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             ['id' => $id, 'limit' => $limit, 'q' => $q, 'start' => $start]
         );

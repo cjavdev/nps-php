@@ -8,6 +8,7 @@ use Nps\Alerts\AlertListResponse;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\AlertsContract;
 
@@ -39,6 +40,8 @@ final class AlertsService implements AlertsContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<AlertListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -48,7 +51,7 @@ final class AlertsService implements AlertsContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AlertListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

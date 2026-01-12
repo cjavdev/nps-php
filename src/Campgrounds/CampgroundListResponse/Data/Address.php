@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Nps\Campgrounds\CampgroundListResponse\Data\Data;
+namespace Nps\Campgrounds\CampgroundListResponse\Data;
 
-use Nps\Campgrounds\CampgroundListResponse\Data\Data\Address\Type;
+use Nps\Campgrounds\CampgroundListResponse\Data\Address\Type;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;

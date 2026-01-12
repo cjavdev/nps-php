@@ -5,6 +5,7 @@ namespace Tests\Services;
 use Nps\Activities\ActivityListParksResponse;
 use Nps\Activities\ActivityListResponse;
 use Nps\Client;
+use Nps\LimitStartPagination;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -48,9 +49,14 @@ final class ActivitiesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->activities->listParks();
+        $page = $this->client->activities->listParks();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ActivityListParksResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ActivityListParksResponse::class, $item);
+        }
     }
 }

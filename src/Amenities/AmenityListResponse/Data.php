@@ -9,32 +9,24 @@ use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Amenities\AmenityListResponse\Data\Data as DataShape1
- *
- * @phpstan-type DataShape = array{
- *   data?: list<\Nps\Amenities\AmenityListResponse\Data\Data|DataShape1>|null,
- *   limit?: string|null,
- *   start?: string|null,
- *   total?: string|null,
- * }
+ * @phpstan-type DataShape = array{id?: string|null, name?: string|null}
  */
 final class Data implements BaseModel
 {
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<Data\Data>|null $data */
-    #[Optional(list: Data\Data::class)]
-    public ?array $data;
-
+    /**
+     * Unique identifier for this amenity.
+     */
     #[Optional]
-    public ?string $limit;
+    public ?string $id;
 
+    /**
+     * This amenity's name.
+     */
     #[Optional]
-    public ?string $start;
-
-    #[Optional]
-    public ?string $total;
+    public ?string $name;
 
     public function __construct()
     {
@@ -45,56 +37,35 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data\Data|DataShape1>|null $data
      */
-    public static function with(
-        ?array $data = null,
-        ?string $limit = null,
-        ?string $start = null,
-        ?string $total = null,
-    ): self {
+    public static function with(?string $id = null, ?string $name = null): self
+    {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $limit && $self['limit'] = $limit;
-        null !== $start && $self['start'] = $start;
-        null !== $total && $self['total'] = $total;
+        null !== $id && $self['id'] = $id;
+        null !== $name && $self['name'] = $name;
 
         return $self;
     }
 
     /**
-     * @param list<Data\Data|DataShape1> $data
+     * Unique identifier for this amenity.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['id'] = $id;
 
         return $self;
     }
 
-    public function withLimit(string $limit): self
+    /**
+     * This amenity's name.
+     */
+    public function withName(string $name): self
     {
         $self = clone $this;
-        $self['limit'] = $limit;
-
-        return $self;
-    }
-
-    public function withStart(string $start): self
-    {
-        $self = clone $this;
-        $self['start'] = $start;
-
-        return $self;
-    }
-
-    public function withTotal(string $total): self
-    {
-        $self = clone $this;
-        $self['total'] = $total;
+        $self['name'] = $name;
 
         return $self;
     }

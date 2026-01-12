@@ -12,6 +12,7 @@ use Nps\Amenities\AmenityRetrieveParksPlacesParams;
 use Nps\Amenities\AmenityRetrieveParksVisitorCentersParams;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -25,7 +26,7 @@ interface AmenitiesRawContract
      * @param array<string,mixed>|AmenityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AmenityListResponse>
+     * @return BaseResponse<LimitStartPagination<AmenityListResponse>>
      *
      * @throws APIException
      */

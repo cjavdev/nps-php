@@ -8,6 +8,7 @@ use Nps\Amenities\AmenityGetParksPlacesResponse;
 use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
 use Nps\Amenities\AmenityListResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -24,6 +25,8 @@ interface AmenitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<AmenityListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -32,7 +35,7 @@ interface AmenitiesContract
         ?string $q = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AmenityListResponse;
+    ): LimitStartPagination;
 
     /**
      * @api

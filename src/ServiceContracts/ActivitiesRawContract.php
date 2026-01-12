@@ -10,6 +10,7 @@ use Nps\Activities\ActivityListParksResponse;
 use Nps\Activities\ActivityListResponse;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -38,7 +39,7 @@ interface ActivitiesRawContract
      * @param array<string,mixed>|ActivityListParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActivityListParksResponse>
+     * @return BaseResponse<LimitStartPagination<ActivityListParksResponse>>
      *
      * @throws APIException
      */

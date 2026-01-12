@@ -11,6 +11,7 @@ use Nps\Activities\ActivityListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ActivitiesRawContract;
 
@@ -66,7 +67,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
      * }|ActivityListParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActivityListParksResponse>
+     * @return BaseResponse<LimitStartPagination<ActivityListParksResponse>>
      *
      * @throws APIException
      */
@@ -86,6 +87,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
             query: $parsed,
             options: $options,
             convert: ActivityListParksResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

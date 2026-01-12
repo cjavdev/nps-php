@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace Nps\Activities\ActivityListParksResponse;
 
+use Nps\Activities\ActivityListParksResponse\Data\Park;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Activities\ActivityListParksResponse\Data\Data as DataShape1
+ * @phpstan-import-type ParkShape from \Nps\Activities\ActivityListParksResponse\Data\Park
  *
  * @phpstan-type DataShape = array{
- *   data?: list<\Nps\Activities\ActivityListParksResponse\Data\Data|DataShape1>|null,
- *   limit?: string|null,
- *   start?: string|null,
- *   total?: string|null,
+ *   id?: string|null, name?: string|null, parks?: list<Park|ParkShape>|null
  * }
  */
 final class Data implements BaseModel
@@ -23,18 +21,21 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<Data\Data>|null $data */
-    #[Optional(list: Data\Data::class)]
-    public ?array $data;
-
+    /**
+     * Unique identifier for activity park record.
+     */
     #[Optional]
-    public ?string $limit;
+    public ?string $id;
 
+    /**
+     * Name for activity park record.
+     */
     #[Optional]
-    public ?string $start;
+    public ?string $name;
 
-    #[Optional]
-    public ?string $total;
+    /** @var list<Park>|null $parks */
+    #[Optional(list: Park::class)]
+    public ?array $parks;
 
     public function __construct()
     {
@@ -46,55 +47,51 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data\Data|DataShape1>|null $data
+     * @param list<Park|ParkShape>|null $parks
      */
     public static function with(
-        ?array $data = null,
-        ?string $limit = null,
-        ?string $start = null,
-        ?string $total = null,
+        ?string $id = null,
+        ?string $name = null,
+        ?array $parks = null
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $limit && $self['limit'] = $limit;
-        null !== $start && $self['start'] = $start;
-        null !== $total && $self['total'] = $total;
+        null !== $id && $self['id'] = $id;
+        null !== $name && $self['name'] = $name;
+        null !== $parks && $self['parks'] = $parks;
 
         return $self;
     }
 
     /**
-     * @param list<Data\Data|DataShape1> $data
+     * Unique identifier for activity park record.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['id'] = $id;
 
         return $self;
     }
 
-    public function withLimit(string $limit): self
+    /**
+     * Name for activity park record.
+     */
+    public function withName(string $name): self
     {
         $self = clone $this;
-        $self['limit'] = $limit;
+        $self['name'] = $name;
 
         return $self;
     }
 
-    public function withStart(string $start): self
+    /**
+     * @param list<Park|ParkShape> $parks
+     */
+    public function withParks(array $parks): self
     {
         $self = clone $this;
-        $self['start'] = $start;
-
-        return $self;
-    }
-
-    public function withTotal(string $total): self
-    {
-        $self = clone $this;
-        $self['total'] = $total;
+        $self['parks'] = $parks;
 
         return $self;
     }

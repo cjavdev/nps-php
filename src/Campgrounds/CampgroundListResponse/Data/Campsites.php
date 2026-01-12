@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\Campgrounds\CampgroundListResponse\Data\Data;
+namespace Nps\Campgrounds\CampgroundListResponse\Data;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;

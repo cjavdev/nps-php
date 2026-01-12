@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Nps\Articles\ArticleListResponse\Data\Data;
+namespace Nps\Activities\ActivityListParksResponse\Data;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type RelatedParkShape = array{
+ * @phpstan-type ParkShape = array{
  *   designation?: string|null,
  *   fullName?: string|null,
  *   name?: string|null,
@@ -18,23 +18,35 @@ use Nps\Core\Contracts\BaseModel;
  *   url?: string|null,
  * }
  */
-final class RelatedPark implements BaseModel
+final class Park implements BaseModel
 {
-    /** @use SdkModel<RelatedParkShape> */
+    /** @use SdkModel<ParkShape> */
     use SdkModel;
 
     #[Optional]
     public ?string $designation;
 
+    /**
+     * full name of a park.
+     */
     #[Optional]
     public ?string $fullName;
 
+    /**
+     * The name of the park.
+     */
     #[Optional]
     public ?string $name;
 
+    /**
+     * Four letter alpha code for this park.
+     */
     #[Optional]
     public ?string $parkCode;
 
+    /**
+     * A comma delimited list of two letter state codes.
+     */
     #[Optional]
     public ?string $states;
 
@@ -79,6 +91,9 @@ final class RelatedPark implements BaseModel
         return $self;
     }
 
+    /**
+     * full name of a park.
+     */
     public function withFullName(string $fullName): self
     {
         $self = clone $this;
@@ -87,6 +102,9 @@ final class RelatedPark implements BaseModel
         return $self;
     }
 
+    /**
+     * The name of the park.
+     */
     public function withName(string $name): self
     {
         $self = clone $this;
@@ -95,6 +113,9 @@ final class RelatedPark implements BaseModel
         return $self;
     }
 
+    /**
+     * Four letter alpha code for this park.
+     */
     public function withParkCode(string $parkCode): self
     {
         $self = clone $this;
@@ -103,6 +124,9 @@ final class RelatedPark implements BaseModel
         return $self;
     }
 
+    /**
+     * A comma delimited list of two letter state codes.
+     */
     public function withStates(string $states): self
     {
         $self = clone $this;

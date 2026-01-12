@@ -9,6 +9,7 @@ use Nps\Alerts\AlertListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\AlertsRawContract;
 
@@ -35,7 +36,7 @@ final class AlertsRawService implements AlertsRawContract
      * }|AlertListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AlertListResponse>
+     * @return BaseResponse<LimitStartPagination<AlertListResponse>>
      *
      * @throws APIException
      */
@@ -55,6 +56,7 @@ final class AlertsRawService implements AlertsRawContract
             query: $parsed,
             options: $options,
             convert: AlertListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

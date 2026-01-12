@@ -8,6 +8,7 @@ use Nps\Campgrounds\CampgroundListParams;
 use Nps\Campgrounds\CampgroundListResponse;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +22,7 @@ interface CampgroundsRawContract
      * @param array<string,mixed>|CampgroundListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CampgroundListResponse>
+     * @return BaseResponse<LimitStartPagination<CampgroundListResponse>>
      *
      * @throws APIException
      */

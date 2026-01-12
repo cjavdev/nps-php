@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\Campgrounds\CampgroundListResponse\Data\Data\Contacts\PhoneNumber;
+namespace Nps\Campgrounds\CampgroundListResponse\Data\Contacts\PhoneNumber;
 
 enum Type: string
 {
