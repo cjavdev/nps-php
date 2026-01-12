@@ -6,11 +6,10 @@ namespace Nps\Services;
 
 use Nps\Activities\ActivityListParams;
 use Nps\Activities\ActivityListParksParams;
-use Nps\Activities\ActivityListParksResponseItem;
-use Nps\Activities\ActivityListResponseItem;
+use Nps\Activities\ActivityListParksResponse;
+use Nps\Activities\ActivityListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ActivitiesRawContract;
@@ -34,7 +33,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
      * }|ActivityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ActivityListResponseItem>>
+     * @return BaseResponse<ActivityListResponse>
      *
      * @throws APIException
      */
@@ -53,7 +52,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
             path: 'activities',
             query: $parsed,
             options: $options,
-            convert: new ListOf(ActivityListResponseItem::class),
+            convert: ActivityListResponse::class,
         );
     }
 
@@ -67,7 +66,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
      * }|ActivityListParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ActivityListParksResponseItem>>
+     * @return BaseResponse<ActivityListParksResponse>
      *
      * @throws APIException
      */
@@ -86,7 +85,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
             path: 'activities/parks',
             query: $parsed,
             options: $options,
-            convert: new ListOf(ActivityListParksResponseItem::class),
+            convert: ActivityListParksResponse::class,
         );
     }
 }

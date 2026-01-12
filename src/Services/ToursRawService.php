@@ -6,12 +6,11 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ToursRawContract;
 use Nps\Tours\TourListParams;
-use Nps\Tours\TourListResponseItem;
+use Nps\Tours\TourListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -38,7 +37,7 @@ final class ToursRawService implements ToursRawContract
      * }|TourListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TourListResponseItem>>
+     * @return BaseResponse<TourListResponse>
      *
      * @throws APIException
      */
@@ -57,7 +56,7 @@ final class ToursRawService implements ToursRawContract
             path: 'tours',
             query: $parsed,
             options: $options,
-            convert: new ListOf(TourListResponseItem::class),
+            convert: TourListResponse::class,
         );
     }
 }

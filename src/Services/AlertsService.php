@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Nps\Services;
 
-use Nps\Alerts\AlertListResponseItem;
+use Nps\Alerts\AlertListResponse;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
@@ -39,8 +39,6 @@ final class AlertsService implements AlertsContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<AlertListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +48,7 @@ final class AlertsService implements AlertsContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): AlertListResponse {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

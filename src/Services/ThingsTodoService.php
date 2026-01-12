@@ -9,7 +9,7 @@ use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ThingsTodoContract;
-use Nps\ThingsTodo\ThingsTodoListResponseItem;
+use Nps\ThingsTodo\ThingsTodoListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -41,8 +41,6 @@ final class ThingsTodoService implements ThingsTodoContract
      * @param string $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ThingsTodoListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -54,7 +52,7 @@ final class ThingsTodoService implements ThingsTodoContract
         ?string $start = null,
         ?string $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): ThingsTodoListResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,

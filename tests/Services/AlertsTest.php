@@ -2,6 +2,7 @@
 
 namespace Tests\Services;
 
+use Nps\Alerts\AlertListResponse;
 use Nps\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -36,6 +37,6 @@ final class AlertsTest extends TestCase
         $result = $this->client->alerts->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(AlertListResponse::class, $result);
     }
 }

@@ -49,7 +49,7 @@ $client = new Client(apiKey: getenv('NATIONAL_PARK_KEY') ?: 'My API Key');
 
 $activities = $client->activities->list();
 
-var_dump($activities);
+var_dump($activities->data);
 ```
 
 ### Value Objects

@@ -8,7 +8,7 @@ use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\RoadEvents\RoadEventListParams;
-use Nps\RoadEvents\RoadEventListResponseItem;
+use Nps\RoadEvents\RoadEventListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -21,7 +21,7 @@ interface RoadEventsRawContract
      * @param array<string,mixed>|RoadEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<RoadEventListResponseItem>>
+     * @return BaseResponse<RoadEventListResponse>
      *
      * @throws APIException
      */

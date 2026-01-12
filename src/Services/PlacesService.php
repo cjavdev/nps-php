@@ -7,7 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\Places\PlaceListResponseItem;
+use Nps\Places\PlaceListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\PlacesContract;
 
@@ -39,8 +39,6 @@ final class PlacesService implements PlacesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<PlaceListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +48,7 @@ final class PlacesService implements PlacesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): PlaceListResponse {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

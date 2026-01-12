@@ -9,7 +9,7 @@ use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ToursContract;
-use Nps\Tours\TourListResponseItem;
+use Nps\Tours\TourListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -41,8 +41,6 @@ final class ToursService implements ToursContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TourListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -54,7 +52,7 @@ final class ToursService implements ToursContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): TourListResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,

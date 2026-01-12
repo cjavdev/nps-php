@@ -6,11 +6,10 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\RoadEvents\RoadEventListParams;
-use Nps\RoadEvents\RoadEventListResponseItem;
+use Nps\RoadEvents\RoadEventListResponse;
 use Nps\ServiceContracts\RoadEventsRawContract;
 
 /**
@@ -30,7 +29,7 @@ final class RoadEventsRawService implements RoadEventsRawContract
      * @param array{parkCode?: string, type?: string}|RoadEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<RoadEventListResponseItem>>
+     * @return BaseResponse<RoadEventListResponse>
      *
      * @throws APIException
      */
@@ -49,7 +48,7 @@ final class RoadEventsRawService implements RoadEventsRawContract
             path: 'roadevents',
             query: $parsed,
             options: $options,
-            convert: new ListOf(RoadEventListResponseItem::class),
+            convert: RoadEventListResponse::class,
         );
     }
 }

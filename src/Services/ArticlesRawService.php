@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Nps\Services;
 
 use Nps\Articles\ArticleListParams;
-use Nps\Articles\ArticleListResponseItem;
+use Nps\Articles\ArticleListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ArticlesRawContract;
@@ -36,7 +35,7 @@ final class ArticlesRawService implements ArticlesRawContract
      * }|ArticleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ArticleListResponseItem>>
+     * @return BaseResponse<ArticleListResponse>
      *
      * @throws APIException
      */
@@ -55,7 +54,7 @@ final class ArticlesRawService implements ArticlesRawContract
             path: 'articles',
             query: $parsed,
             options: $options,
-            convert: new ListOf(ArticleListResponseItem::class),
+            convert: ArticleListResponse::class,
         );
     }
 }

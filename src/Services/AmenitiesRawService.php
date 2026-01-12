@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Nps\Services;
 
-use Nps\Amenities\AmenityGetParksPlacesResponseItem;
-use Nps\Amenities\AmenityGetParksVisitorCentersResponseItem;
+use Nps\Amenities\AmenityGetParksPlacesResponse;
+use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
 use Nps\Amenities\AmenityListParams;
-use Nps\Amenities\AmenityListResponseItem;
+use Nps\Amenities\AmenityListResponse;
 use Nps\Amenities\AmenityRetrieveParksPlacesParams;
 use Nps\Amenities\AmenityRetrieveParksVisitorCentersParams;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\AmenitiesRawContract;
@@ -36,7 +35,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
      * }|AmenityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AmenityListResponseItem>>
+     * @return BaseResponse<AmenityListResponse>
      *
      * @throws APIException
      */
@@ -55,7 +54,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
             path: 'amenities',
             query: $parsed,
             options: $options,
-            convert: new ListOf(AmenityListResponseItem::class),
+            convert: AmenityListResponse::class,
         );
     }
 
@@ -72,7 +71,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
      * }|AmenityRetrieveParksPlacesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AmenityGetParksPlacesResponseItem>>
+     * @return BaseResponse<AmenityGetParksPlacesResponse>
      *
      * @throws APIException
      */
@@ -91,7 +90,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
             path: 'amenities/parksplaces',
             query: $parsed,
             options: $options,
-            convert: new ListOf(AmenityGetParksPlacesResponseItem::class),
+            convert: AmenityGetParksPlacesResponse::class,
         );
     }
 
@@ -108,7 +107,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
      * }|AmenityRetrieveParksVisitorCentersParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AmenityGetParksVisitorCentersResponseItem>>
+     * @return BaseResponse<AmenityGetParksVisitorCentersResponse>
      *
      * @throws APIException
      */
@@ -127,7 +126,7 @@ final class AmenitiesRawService implements AmenitiesRawContract
             path: 'amenities/parksvisitorcenters',
             query: $parsed,
             options: $options,
-            convert: new ListOf(AmenityGetParksVisitorCentersResponseItem::class),
+            convert: AmenityGetParksVisitorCentersResponse::class,
         );
     }
 }

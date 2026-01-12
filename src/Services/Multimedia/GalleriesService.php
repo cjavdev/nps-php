@@ -7,8 +7,8 @@ namespace Nps\Services\Multimedia;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\Multimedia\Galleries\GalleryListAssetsResponseItem;
-use Nps\Multimedia\Galleries\GalleryListResponseItem;
+use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
+use Nps\Multimedia\Galleries\GalleryListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\Multimedia\GalleriesContract;
 
@@ -40,8 +40,6 @@ final class GalleriesService implements GalleriesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<GalleryListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -51,7 +49,7 @@ final class GalleriesService implements GalleriesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): GalleryListResponse {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,
@@ -80,8 +78,6 @@ final class GalleriesService implements GalleriesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<GalleryListAssetsResponseItem>
-     *
      * @throws APIException
      */
     public function listAssets(
@@ -93,7 +89,7 @@ final class GalleriesService implements GalleriesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): GalleryListAssetsResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Nps\Services;
 
 use Nps\Alerts\AlertListParams;
-use Nps\Alerts\AlertListResponseItem;
+use Nps\Alerts\AlertListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\AlertsRawContract;
@@ -36,7 +35,7 @@ final class AlertsRawService implements AlertsRawContract
      * }|AlertListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AlertListResponseItem>>
+     * @return BaseResponse<AlertListResponse>
      *
      * @throws APIException
      */
@@ -55,7 +54,7 @@ final class AlertsRawService implements AlertsRawContract
             path: 'alerts',
             query: $parsed,
             options: $options,
-            convert: new ListOf(AlertListResponseItem::class),
+            convert: AlertListResponse::class,
         );
     }
 }

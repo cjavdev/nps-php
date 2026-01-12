@@ -6,12 +6,11 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\WebcamsRawContract;
 use Nps\Webcams\WebcamListParams;
-use Nps\Webcams\WebcamListResponseItem;
+use Nps\Webcams\WebcamListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -37,7 +36,7 @@ final class WebcamsRawService implements WebcamsRawContract
      * }|WebcamListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<WebcamListResponseItem>>
+     * @return BaseResponse<WebcamListResponse>
      *
      * @throws APIException
      */
@@ -56,7 +55,7 @@ final class WebcamsRawService implements WebcamsRawContract
             path: 'webcams',
             query: $parsed,
             options: $options,
-            convert: new ListOf(WebcamListResponseItem::class),
+            convert: WebcamListResponse::class,
         );
     }
 }

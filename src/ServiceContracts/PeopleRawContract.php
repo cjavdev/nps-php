@@ -7,7 +7,7 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\People\PersonListParams;
-use Nps\People\PersonListResponseItem;
+use Nps\People\PersonListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +21,7 @@ interface PeopleRawContract
      * @param array<string,mixed>|PersonListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<PersonListResponseItem>>
+     * @return BaseResponse<PersonListResponse>
      *
      * @throws APIException
      */

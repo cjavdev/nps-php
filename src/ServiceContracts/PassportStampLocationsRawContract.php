@@ -7,7 +7,7 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\PassportStampLocations\PassportStampLocationListParams;
-use Nps\PassportStampLocations\PassportStampLocationListResponseItem;
+use Nps\PassportStampLocations\PassportStampLocationListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +21,7 @@ interface PassportStampLocationsRawContract
      * @param array<string,mixed>|PassportStampLocationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<PassportStampLocationListResponseItem>>
+     * @return BaseResponse<PassportStampLocationListResponse>
      *
      * @throws APIException
      */

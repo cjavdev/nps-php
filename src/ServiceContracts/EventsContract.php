@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
-use Nps\Events\EventListResponseItem;
+use Nps\Events\EventListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -34,8 +34,6 @@ interface EventsContract
      * @param list<string> $tagsOne a comma delimited list of tags that may be included
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<EventListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -56,5 +54,5 @@ interface EventsContract
         ?array $tagsNone = null,
         ?array $tagsOne = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): EventListResponse;
 }

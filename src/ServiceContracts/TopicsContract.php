@@ -6,8 +6,8 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
-use Nps\Topics\TopicGetParksResponseItem;
-use Nps\Topics\TopicListResponseItem;
+use Nps\Topics\TopicGetParksResponse;
+use Nps\Topics\TopicListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -24,8 +24,6 @@ interface TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TopicListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -35,7 +33,7 @@ interface TopicsContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): TopicListResponse;
 
     /**
      * @api
@@ -47,8 +45,6 @@ interface TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TopicGetParksResponseItem>
-     *
      * @throws APIException
      */
     public function retrieveParks(
@@ -58,5 +54,5 @@ interface TopicsContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): TopicGetParksResponse;
 }

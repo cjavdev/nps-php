@@ -6,10 +6,9 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\Events\EventListParams;
-use Nps\Events\EventListResponseItem;
+use Nps\Events\EventListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\EventsRawContract;
 
@@ -47,7 +46,7 @@ final class EventsRawService implements EventsRawContract
      * }|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<EventListResponseItem>>
+     * @return BaseResponse<EventListResponse>
      *
      * @throws APIException
      */
@@ -66,7 +65,7 @@ final class EventsRawService implements EventsRawContract
             path: 'events',
             query: $parsed,
             options: $options,
-            convert: new ListOf(EventListResponseItem::class),
+            convert: EventListResponse::class,
         );
     }
 }

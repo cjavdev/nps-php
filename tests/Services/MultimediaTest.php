@@ -3,6 +3,8 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\Multimedia\MultimediaListAudioResponse;
+use Nps\Multimedia\MultimediaListVideosResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -36,7 +38,7 @@ final class MultimediaTest extends TestCase
         $result = $this->client->multimedia->listAudio();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(MultimediaListAudioResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +51,6 @@ final class MultimediaTest extends TestCase
         $result = $this->client->multimedia->listVideos();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(MultimediaListVideosResponse::class, $result);
     }
 }

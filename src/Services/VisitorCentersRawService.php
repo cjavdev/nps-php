@@ -6,12 +6,11 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\VisitorCentersRawContract;
 use Nps\VisitorCenters\VisitorCenterListParams;
-use Nps\VisitorCenters\VisitorCenterListResponseItem;
+use Nps\VisitorCenters\VisitorCenterListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -37,7 +36,7 @@ final class VisitorCentersRawService implements VisitorCentersRawContract
      * }|VisitorCenterListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<VisitorCenterListResponseItem>>
+     * @return BaseResponse<VisitorCenterListResponse>
      *
      * @throws APIException
      */
@@ -56,7 +55,7 @@ final class VisitorCentersRawService implements VisitorCentersRawContract
             path: 'visitorcenters',
             query: $parsed,
             options: $options,
-            convert: new ListOf(VisitorCenterListResponseItem::class),
+            convert: VisitorCenterListResponse::class,
         );
     }
 }

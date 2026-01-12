@@ -6,7 +6,7 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
-use Nps\Webcams\WebcamListResponseItem;
+use Nps\Webcams\WebcamListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -24,8 +24,6 @@ interface WebcamsContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<WebcamListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -36,5 +34,5 @@ interface WebcamsContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): WebcamListResponse;
 }

@@ -7,8 +7,8 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\Multimedia\MultimediaListAudioResponseItem;
-use Nps\Multimedia\MultimediaListVideosResponseItem;
+use Nps\Multimedia\MultimediaListAudioResponse;
+use Nps\Multimedia\MultimediaListVideosResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\MultimediaContract;
 use Nps\Services\Multimedia\GalleriesService;
@@ -47,8 +47,6 @@ final class MultimediaService implements MultimediaContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<MultimediaListAudioResponseItem>
-     *
      * @throws APIException
      */
     public function listAudio(
@@ -58,7 +56,7 @@ final class MultimediaService implements MultimediaContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): MultimediaListAudioResponse {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,
@@ -85,8 +83,6 @@ final class MultimediaService implements MultimediaContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<MultimediaListVideosResponseItem>
-     *
      * @throws APIException
      */
     public function listVideos(
@@ -96,7 +92,7 @@ final class MultimediaService implements MultimediaContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): MultimediaListVideosResponse {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

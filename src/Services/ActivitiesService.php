@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Nps\Services;
 
-use Nps\Activities\ActivityListParksResponseItem;
-use Nps\Activities\ActivityListResponseItem;
+use Nps\Activities\ActivityListParksResponse;
+use Nps\Activities\ActivityListResponse;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
@@ -40,8 +40,6 @@ final class ActivitiesService implements ActivitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ActivityListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -51,7 +49,7 @@ final class ActivitiesService implements ActivitiesContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): ActivityListResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -80,8 +78,6 @@ final class ActivitiesService implements ActivitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ActivityListParksResponseItem>
-     *
      * @throws APIException
      */
     public function listParks(
@@ -91,7 +87,7 @@ final class ActivitiesService implements ActivitiesContract
         ?array $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): ActivityListParksResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,
