@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\TopicsRawContract;
 use Nps\Topics\TopicGetParksResponse;
@@ -33,7 +34,7 @@ final class TopicsRawService implements TopicsRawContract
      * }|TopicListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TopicListResponse>
+     * @return BaseResponse<LimitStartPagination<TopicListResponse>>
      *
      * @throws APIException
      */
@@ -53,6 +54,7 @@ final class TopicsRawService implements TopicsRawContract
             query: $parsed,
             options: $options,
             convert: TopicListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 

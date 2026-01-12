@@ -7,15 +7,21 @@ namespace Nps\Lessonplans\LessonplanListResponse;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
+use Nps\Lessonplans\LessonplanListResponse\Data\Commoncore;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Lessonplans\LessonplanListResponse\Data\Data as DataShape1
+ * @phpstan-import-type CommoncoreShape from \Nps\Lessonplans\LessonplanListResponse\Data\Commoncore
  *
  * @phpstan-type DataShape = array{
- *   data?: list<\Nps\Lessonplans\LessonplanListResponse\Data\Data|DataShape1>|null,
- *   limit?: string|null,
- *   start?: string|null,
- *   total?: string|null,
+ *   id?: string|null,
+ *   commoncore?: null|Commoncore|CommoncoreShape,
+ *   duration?: string|null,
+ *   gradelevel?: string|null,
+ *   parks?: list<string>|null,
+ *   questionobjective?: string|null,
+ *   subject?: string|null,
+ *   title?: string|null,
+ *   url?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -23,18 +29,61 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<Data\Data>|null $data */
-    #[Optional(list: Data\Data::class)]
-    public ?array $data;
-
+    /**
+     * Unique identifier for this lesson plan.
+     */
     #[Optional]
-    public ?string $limit;
+    public ?string $id;
 
+    /**
+     * Educational standards that apply to this lesson.
+     */
     #[Optional]
-    public ?string $start;
+    public ?Commoncore $commoncore;
 
+    /**
+     * Time it takes to peform the lesson.
+     */
     #[Optional]
-    public ?string $total;
+    public ?string $duration;
+
+    /**
+     * Grade level of students at which this lesson is aimed.
+     */
+    #[Optional]
+    public ?string $gradelevel;
+
+    /**
+     * Related parks for this lesson plan.
+     *
+     * @var list<string>|null $parks
+     */
+    #[Optional(list: 'string')]
+    public ?array $parks;
+
+    /**
+     * Objective of the lesson or the question student should be able to answer at the end of the lesson.
+     */
+    #[Optional]
+    public ?string $questionobjective;
+
+    /**
+     * Broad subject the lesson falls under= literacy and language arts, math, science, or social studies.
+     */
+    #[Optional]
+    public ?string $subject;
+
+    /**
+     * Lesson plan title.
+     */
+    #[Optional]
+    public ?string $title;
+
+    /**
+     * Lesson plan link.
+     */
+    #[Optional]
+    public ?string $url;
 
     public function __construct()
     {
@@ -46,55 +95,134 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data\Data|DataShape1>|null $data
+     * @param Commoncore|CommoncoreShape|null $commoncore
+     * @param list<string>|null $parks
      */
     public static function with(
-        ?array $data = null,
-        ?string $limit = null,
-        ?string $start = null,
-        ?string $total = null,
+        ?string $id = null,
+        Commoncore|array|null $commoncore = null,
+        ?string $duration = null,
+        ?string $gradelevel = null,
+        ?array $parks = null,
+        ?string $questionobjective = null,
+        ?string $subject = null,
+        ?string $title = null,
+        ?string $url = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $limit && $self['limit'] = $limit;
-        null !== $start && $self['start'] = $start;
-        null !== $total && $self['total'] = $total;
+        null !== $id && $self['id'] = $id;
+        null !== $commoncore && $self['commoncore'] = $commoncore;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $gradelevel && $self['gradelevel'] = $gradelevel;
+        null !== $parks && $self['parks'] = $parks;
+        null !== $questionobjective && $self['questionobjective'] = $questionobjective;
+        null !== $subject && $self['subject'] = $subject;
+        null !== $title && $self['title'] = $title;
+        null !== $url && $self['url'] = $url;
 
         return $self;
     }
 
     /**
-     * @param list<Data\Data|DataShape1> $data
+     * Unique identifier for this lesson plan.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['id'] = $id;
 
         return $self;
     }
 
-    public function withLimit(string $limit): self
+    /**
+     * Educational standards that apply to this lesson.
+     *
+     * @param Commoncore|CommoncoreShape $commoncore
+     */
+    public function withCommoncore(Commoncore|array $commoncore): self
     {
         $self = clone $this;
-        $self['limit'] = $limit;
+        $self['commoncore'] = $commoncore;
 
         return $self;
     }
 
-    public function withStart(string $start): self
+    /**
+     * Time it takes to peform the lesson.
+     */
+    public function withDuration(string $duration): self
     {
         $self = clone $this;
-        $self['start'] = $start;
+        $self['duration'] = $duration;
 
         return $self;
     }
 
-    public function withTotal(string $total): self
+    /**
+     * Grade level of students at which this lesson is aimed.
+     */
+    public function withGradelevel(string $gradelevel): self
     {
         $self = clone $this;
-        $self['total'] = $total;
+        $self['gradelevel'] = $gradelevel;
+
+        return $self;
+    }
+
+    /**
+     * Related parks for this lesson plan.
+     *
+     * @param list<string> $parks
+     */
+    public function withParks(array $parks): self
+    {
+        $self = clone $this;
+        $self['parks'] = $parks;
+
+        return $self;
+    }
+
+    /**
+     * Objective of the lesson or the question student should be able to answer at the end of the lesson.
+     */
+    public function withQuestionobjective(string $questionobjective): self
+    {
+        $self = clone $this;
+        $self['questionobjective'] = $questionobjective;
+
+        return $self;
+    }
+
+    /**
+     * Broad subject the lesson falls under= literacy and language arts, math, science, or social studies.
+     */
+    public function withSubject(string $subject): self
+    {
+        $self = clone $this;
+        $self['subject'] = $subject;
+
+        return $self;
+    }
+
+    /**
+     * Lesson plan title.
+     */
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
+    }
+
+    /**
+     * Lesson plan link.
+     */
+    public function withURL(string $url): self
+    {
+        $self = clone $this;
+        $self['url'] = $url;
 
         return $self;
     }

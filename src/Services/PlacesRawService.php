@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\Places\PlaceListParams;
 use Nps\Places\PlaceListResponse;
 use Nps\RequestOptions;
@@ -35,7 +36,7 @@ final class PlacesRawService implements PlacesRawContract
      * }|PlaceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlaceListResponse>
+     * @return BaseResponse<LimitStartPagination<PlaceListResponse>>
      *
      * @throws APIException
      */
@@ -55,6 +56,7 @@ final class PlacesRawService implements PlacesRawContract
             query: $parsed,
             options: $options,
             convert: PlaceListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

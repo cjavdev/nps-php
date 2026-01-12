@@ -6,6 +6,7 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\MultimediaListAudioParams;
 use Nps\Multimedia\MultimediaListAudioResponse;
 use Nps\Multimedia\MultimediaListVideosParams;
@@ -23,7 +24,7 @@ interface MultimediaRawContract
      * @param array<string,mixed>|MultimediaListAudioParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MultimediaListAudioResponse>
+     * @return BaseResponse<LimitStartPagination<MultimediaListAudioResponse>>
      *
      * @throws APIException
      */
@@ -38,7 +39,7 @@ interface MultimediaRawContract
      * @param array<string,mixed>|MultimediaListVideosParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MultimediaListVideosResponse>
+     * @return BaseResponse<LimitStartPagination<MultimediaListVideosResponse>>
      *
      * @throws APIException
      */

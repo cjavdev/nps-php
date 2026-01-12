@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ToursRawContract;
 use Nps\Tours\TourListParams;
@@ -37,7 +38,7 @@ final class ToursRawService implements ToursRawContract
      * }|TourListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TourListResponse>
+     * @return BaseResponse<LimitStartPagination<TourListResponse>>
      *
      * @throws APIException
      */
@@ -57,6 +58,7 @@ final class ToursRawService implements ToursRawContract
             query: $parsed,
             options: $options,
             convert: TourListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

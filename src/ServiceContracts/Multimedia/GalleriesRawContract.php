@@ -6,6 +6,7 @@ namespace Nps\ServiceContracts\Multimedia;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\Galleries\GalleryListAssetsParams;
 use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
 use Nps\Multimedia\Galleries\GalleryListParams;
@@ -23,7 +24,7 @@ interface GalleriesRawContract
      * @param array<string,mixed>|GalleryListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<GalleryListResponse>
+     * @return BaseResponse<LimitStartPagination<GalleryListResponse>>
      *
      * @throws APIException
      */
@@ -38,7 +39,7 @@ interface GalleriesRawContract
      * @param array<string,mixed>|GalleryListAssetsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<GalleryListAssetsResponse>
+     * @return BaseResponse<LimitStartPagination<GalleryListAssetsResponse>>
      *
      * @throws APIException
      */

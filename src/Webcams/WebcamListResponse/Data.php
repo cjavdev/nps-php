@@ -7,15 +7,27 @@ namespace Nps\Webcams\WebcamListResponse;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
+use Nps\Webcams\WebcamListResponse\Data\Image;
+use Nps\Webcams\WebcamListResponse\Data\RelatedPark;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Webcams\WebcamListResponse\Data\Data as DataShape1
+ * @phpstan-import-type ImageShape from \Nps\Webcams\WebcamListResponse\Data\Image
+ * @phpstan-import-type RelatedParkShape from \Nps\Webcams\WebcamListResponse\Data\RelatedPark
  *
  * @phpstan-type DataShape = array{
- *   data?: list<\Nps\Webcams\WebcamListResponse\Data\Data|DataShape1>|null,
- *   limit?: string|null,
- *   start?: string|null,
- *   total?: string|null,
+ *   id?: string|null,
+ *   description?: string|null,
+ *   geometryPoiID?: string|null,
+ *   images?: list<Image|ImageShape>|null,
+ *   isStreaming?: bool|null,
+ *   latitude?: float|null,
+ *   longitude?: float|null,
+ *   relatedParks?: list<RelatedPark|RelatedParkShape>|null,
+ *   status?: string|null,
+ *   statusMessage?: string|null,
+ *   tags?: list<string>|null,
+ *   title?: string|null,
+ *   url?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -23,18 +35,53 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /** @var list<Data\Data>|null $data */
-    #[Optional(list: Data\Data::class)]
-    public ?array $data;
+    #[Optional]
+    public ?string $id;
 
     #[Optional]
-    public ?string $limit;
+    public ?string $description;
+
+    /**
+     * Id for Geometry Point of Interest.
+     */
+    #[Optional('geometryPoiId')]
+    public ?string $geometryPoiID;
+
+    /** @var list<Image>|null $images */
+    #[Optional(list: Image::class)]
+    public ?array $images;
 
     #[Optional]
-    public ?string $start;
+    public ?bool $isStreaming;
 
     #[Optional]
-    public ?string $total;
+    public ?float $latitude;
+
+    #[Optional]
+    public ?float $longitude;
+
+    /** @var list<RelatedPark>|null $relatedParks */
+    #[Optional(list: RelatedPark::class)]
+    public ?array $relatedParks;
+
+    #[Optional]
+    public ?string $status;
+
+    #[Optional]
+    public ?string $statusMessage;
+
+    /** @var list<string>|null $tags */
+    #[Optional(list: 'string')]
+    public ?array $tags;
+
+    #[Optional]
+    public ?string $title;
+
+    /**
+     * URL corresponding to this webcam.
+     */
+    #[Optional]
+    public ?string $url;
 
     public function __construct()
     {
@@ -46,55 +93,159 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data\Data|DataShape1>|null $data
+     * @param list<Image|ImageShape>|null $images
+     * @param list<RelatedPark|RelatedParkShape>|null $relatedParks
+     * @param list<string>|null $tags
      */
     public static function with(
-        ?array $data = null,
-        ?string $limit = null,
-        ?string $start = null,
-        ?string $total = null,
+        ?string $id = null,
+        ?string $description = null,
+        ?string $geometryPoiID = null,
+        ?array $images = null,
+        ?bool $isStreaming = null,
+        ?float $latitude = null,
+        ?float $longitude = null,
+        ?array $relatedParks = null,
+        ?string $status = null,
+        ?string $statusMessage = null,
+        ?array $tags = null,
+        ?string $title = null,
+        ?string $url = null,
     ): self {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
-        null !== $limit && $self['limit'] = $limit;
-        null !== $start && $self['start'] = $start;
-        null !== $total && $self['total'] = $total;
+        null !== $id && $self['id'] = $id;
+        null !== $description && $self['description'] = $description;
+        null !== $geometryPoiID && $self['geometryPoiID'] = $geometryPoiID;
+        null !== $images && $self['images'] = $images;
+        null !== $isStreaming && $self['isStreaming'] = $isStreaming;
+        null !== $latitude && $self['latitude'] = $latitude;
+        null !== $longitude && $self['longitude'] = $longitude;
+        null !== $relatedParks && $self['relatedParks'] = $relatedParks;
+        null !== $status && $self['status'] = $status;
+        null !== $statusMessage && $self['statusMessage'] = $statusMessage;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $title && $self['title'] = $title;
+        null !== $url && $self['url'] = $url;
+
+        return $self;
+    }
+
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
+    public function withDescription(string $description): self
+    {
+        $self = clone $this;
+        $self['description'] = $description;
 
         return $self;
     }
 
     /**
-     * @param list<Data\Data|DataShape1> $data
+     * Id for Geometry Point of Interest.
      */
-    public function withData(array $data): self
+    public function withGeometryPoiID(string $geometryPoiID): self
     {
         $self = clone $this;
-        $self['data'] = $data;
+        $self['geometryPoiID'] = $geometryPoiID;
 
         return $self;
     }
 
-    public function withLimit(string $limit): self
+    /**
+     * @param list<Image|ImageShape> $images
+     */
+    public function withImages(array $images): self
     {
         $self = clone $this;
-        $self['limit'] = $limit;
+        $self['images'] = $images;
 
         return $self;
     }
 
-    public function withStart(string $start): self
+    public function withIsStreaming(bool $isStreaming): self
     {
         $self = clone $this;
-        $self['start'] = $start;
+        $self['isStreaming'] = $isStreaming;
 
         return $self;
     }
 
-    public function withTotal(string $total): self
+    public function withLatitude(float $latitude): self
     {
         $self = clone $this;
-        $self['total'] = $total;
+        $self['latitude'] = $latitude;
+
+        return $self;
+    }
+
+    public function withLongitude(float $longitude): self
+    {
+        $self = clone $this;
+        $self['longitude'] = $longitude;
+
+        return $self;
+    }
+
+    /**
+     * @param list<RelatedPark|RelatedParkShape> $relatedParks
+     */
+    public function withRelatedParks(array $relatedParks): self
+    {
+        $self = clone $this;
+        $self['relatedParks'] = $relatedParks;
+
+        return $self;
+    }
+
+    public function withStatus(string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
+
+        return $self;
+    }
+
+    public function withStatusMessage(string $statusMessage): self
+    {
+        $self = clone $this;
+        $self['statusMessage'] = $statusMessage;
+
+        return $self;
+    }
+
+    /**
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
+    }
+
+    /**
+     * URL corresponding to this webcam.
+     */
+    public function withURL(string $url): self
+    {
+        $self = clone $this;
+        $self['url'] = $url;
 
         return $self;
     }

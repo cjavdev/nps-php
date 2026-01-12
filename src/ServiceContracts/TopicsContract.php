@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\Topics\TopicGetParksResponse;
 use Nps\Topics\TopicListResponse;
@@ -24,6 +25,8 @@ interface TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<TopicListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -33,7 +36,7 @@ interface TopicsContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TopicListResponse;
+    ): LimitStartPagination;
 
     /**
      * @api

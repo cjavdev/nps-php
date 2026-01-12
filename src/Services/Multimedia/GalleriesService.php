@@ -7,6 +7,7 @@ namespace Nps\Services\Multimedia;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
 use Nps\Multimedia\Galleries\GalleryListResponse;
 use Nps\RequestOptions;
@@ -40,6 +41,8 @@ final class GalleriesService implements GalleriesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<GalleryListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -49,7 +52,7 @@ final class GalleriesService implements GalleriesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): GalleryListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,
@@ -78,6 +81,8 @@ final class GalleriesService implements GalleriesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<GalleryListAssetsResponse>
+     *
      * @throws APIException
      */
     public function listAssets(
@@ -89,7 +94,7 @@ final class GalleriesService implements GalleriesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): GalleryListAssetsResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'id' => $id,

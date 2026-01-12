@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\Parks\ParkListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ParksContract;
@@ -40,6 +41,8 @@ final class ParksService implements ParksContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<ParkListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +53,7 @@ final class ParksService implements ParksContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ParkListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

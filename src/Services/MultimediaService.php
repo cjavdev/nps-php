@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\MultimediaListAudioResponse;
 use Nps\Multimedia\MultimediaListVideosResponse;
 use Nps\RequestOptions;
@@ -47,6 +48,8 @@ final class MultimediaService implements MultimediaContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<MultimediaListAudioResponse>
+     *
      * @throws APIException
      */
     public function listAudio(
@@ -56,7 +59,7 @@ final class MultimediaService implements MultimediaContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): MultimediaListAudioResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,
@@ -83,6 +86,8 @@ final class MultimediaService implements MultimediaContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<MultimediaListVideosResponse>
+     *
      * @throws APIException
      */
     public function listVideos(
@@ -92,7 +97,7 @@ final class MultimediaService implements MultimediaContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): MultimediaListVideosResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

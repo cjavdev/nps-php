@@ -7,6 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\VisitorCentersRawContract;
 use Nps\VisitorCenters\VisitorCenterListParams;
@@ -36,7 +37,7 @@ final class VisitorCentersRawService implements VisitorCentersRawContract
      * }|VisitorCenterListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VisitorCenterListResponse>
+     * @return BaseResponse<LimitStartPagination<VisitorCenterListResponse>>
      *
      * @throws APIException
      */
@@ -56,6 +57,7 @@ final class VisitorCentersRawService implements VisitorCentersRawContract
             query: $parsed,
             options: $options,
             convert: VisitorCenterListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

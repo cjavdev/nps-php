@@ -9,6 +9,7 @@ use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Feespasses\FeespassListParams;
 use Nps\Feespasses\FeespassListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\FeespassesRawContract;
 
@@ -36,7 +37,7 @@ final class FeespassesRawService implements FeespassesRawContract
      * }|FeespassListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<FeespassListResponse>
+     * @return BaseResponse<LimitStartPagination<FeespassListResponse>>
      *
      * @throws APIException
      */
@@ -56,6 +57,7 @@ final class FeespassesRawService implements FeespassesRawContract
             query: $parsed,
             options: $options,
             convert: FeespassListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

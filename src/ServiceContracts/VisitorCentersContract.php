@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\VisitorCenters\VisitorCenterListResponse;
 
@@ -24,6 +25,8 @@ interface VisitorCentersContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<VisitorCenterListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -34,5 +37,5 @@ interface VisitorCentersContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VisitorCenterListResponse;
+    ): LimitStartPagination;
 }
