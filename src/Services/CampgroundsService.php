@@ -8,6 +8,7 @@ use Nps\Campgrounds\CampgroundListResponse;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\CampgroundsContract;
 
@@ -40,6 +41,8 @@ final class CampgroundsService implements CampgroundsContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<CampgroundListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +53,7 @@ final class CampgroundsService implements CampgroundsContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): CampgroundListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

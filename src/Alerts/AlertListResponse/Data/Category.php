@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\Alerts\AlertListResponse\Data\Data;
+namespace Nps\Alerts\AlertListResponse\Data;
 
 /**
  * Alert type: Danger, Caution, Information, or Park Closure.

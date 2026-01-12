@@ -8,6 +8,7 @@ use Nps\Alerts\AlertListParams;
 use Nps\Alerts\AlertListResponse;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +22,7 @@ interface AlertsRawContract
      * @param array<string,mixed>|AlertListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AlertListResponse>
+     * @return BaseResponse<LimitStartPagination<AlertListResponse>>
      *
      * @throws APIException
      */

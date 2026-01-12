@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\Articles\ArticleListResponse\Data\Data;
+namespace Nps\Articles\ArticleListResponse\Data;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;

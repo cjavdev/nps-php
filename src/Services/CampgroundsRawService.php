@@ -9,6 +9,7 @@ use Nps\Campgrounds\CampgroundListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\CampgroundsRawContract;
 
@@ -36,7 +37,7 @@ final class CampgroundsRawService implements CampgroundsRawContract
      * }|CampgroundListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CampgroundListResponse>
+     * @return BaseResponse<LimitStartPagination<CampgroundListResponse>>
      *
      * @throws APIException
      */
@@ -56,6 +57,7 @@ final class CampgroundsRawService implements CampgroundsRawContract
             query: $parsed,
             options: $options,
             convert: CampgroundListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

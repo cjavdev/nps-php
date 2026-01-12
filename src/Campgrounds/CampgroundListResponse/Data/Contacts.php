@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Nps\Campgrounds\CampgroundListResponse\Data\Data;
+namespace Nps\Campgrounds\CampgroundListResponse\Data;
 
-use Nps\Campgrounds\CampgroundListResponse\Data\Data\Contacts\EmailAddress;
-use Nps\Campgrounds\CampgroundListResponse\Data\Data\Contacts\PhoneNumber;
+use Nps\Campgrounds\CampgroundListResponse\Data\Contacts\EmailAddress;
+use Nps\Campgrounds\CampgroundListResponse\Data\Contacts\PhoneNumber;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
@@ -13,8 +13,8 @@ use Nps\Core\Contracts\BaseModel;
 /**
  * Information about contacting the park regarding this campground.
  *
- * @phpstan-import-type EmailAddressShape from \Nps\Campgrounds\CampgroundListResponse\Data\Data\Contacts\EmailAddress
- * @phpstan-import-type PhoneNumberShape from \Nps\Campgrounds\CampgroundListResponse\Data\Data\Contacts\PhoneNumber
+ * @phpstan-import-type EmailAddressShape from \Nps\Campgrounds\CampgroundListResponse\Data\Contacts\EmailAddress
+ * @phpstan-import-type PhoneNumberShape from \Nps\Campgrounds\CampgroundListResponse\Data\Contacts\PhoneNumber
  *
  * @phpstan-type ContactsShape = array{
  *   emailAddresses?: list<EmailAddress|EmailAddressShape>|null,

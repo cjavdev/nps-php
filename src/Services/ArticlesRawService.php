@@ -9,6 +9,7 @@ use Nps\Articles\ArticleListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ArticlesRawContract;
 
@@ -35,7 +36,7 @@ final class ArticlesRawService implements ArticlesRawContract
      * }|ArticleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ArticleListResponse>
+     * @return BaseResponse<LimitStartPagination<ArticleListResponse>>
      *
      * @throws APIException
      */
@@ -55,6 +56,7 @@ final class ArticlesRawService implements ArticlesRawContract
             query: $parsed,
             options: $options,
             convert: ArticleListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

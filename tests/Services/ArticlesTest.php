@@ -4,6 +4,7 @@ namespace Tests\Services;
 
 use Nps\Articles\ArticleListResponse;
 use Nps\Client;
+use Nps\LimitStartPagination;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -34,9 +35,14 @@ final class ArticlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->articles->list();
+        $page = $this->client->articles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ArticleListResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ArticleListResponse::class, $item);
+        }
     }
 }

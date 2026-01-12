@@ -6,6 +6,7 @@ use Nps\Amenities\AmenityGetParksPlacesResponse;
 use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
 use Nps\Amenities\AmenityListResponse;
 use Nps\Client;
+use Nps\LimitStartPagination;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -36,10 +37,15 @@ final class AmenitiesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->amenities->list();
+        $page = $this->client->amenities->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AmenityListResponse::class, $result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AmenityListResponse::class, $item);
+        }
     }
 
     #[Test]

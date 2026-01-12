@@ -59,6 +59,33 @@ and named parameters to initialize value objects.
 
 However, builders are also provided `(new Dog)->withName("Joey")`.
 
+### Pagination
+
+List methods in the Nps API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```php
+<?php
+
+use Nps\Client;
+
+$client = new Client(apiKey: getenv('NATIONAL_PARK_KEY') ?: 'My API Key');
+
+$page = $client->activities->listParks();
+
+var_dump($page);
+
+// fetch items from the current page
+foreach ($page->getItems() as $item) {
+  var_dump($item->data);
+}
+// make additional network requests to fetch items from all pages, including and after the current page
+foreach ($page->pagingEachItem() as $item) {
+  var_dump($item->data);
+}
+```
+
 ### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Nps\Core\Exceptions\APIException` will be thrown:

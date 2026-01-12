@@ -14,9 +14,9 @@ use Nps\Core\Contracts\BaseModel;
  *
  * @phpstan-type AmenityGetParksPlacesResponseShape = array{
  *   data?: list<Data|DataShape>|null,
- *   limit?: string|null,
- *   start?: string|null,
- *   total?: string|null,
+ *   limit?: float|null,
+ *   start?: float|null,
+ *   total?: float|null,
  * }
  */
 final class AmenityGetParksPlacesResponse implements BaseModel
@@ -29,13 +29,13 @@ final class AmenityGetParksPlacesResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?string $limit;
+    public ?float $limit;
 
     #[Optional]
-    public ?string $start;
+    public ?float $start;
 
     #[Optional]
-    public ?string $total;
+    public ?float $total;
 
     public function __construct()
     {
@@ -51,9 +51,9 @@ final class AmenityGetParksPlacesResponse implements BaseModel
      */
     public static function with(
         ?array $data = null,
-        ?string $limit = null,
-        ?string $start = null,
-        ?string $total = null,
+        ?float $limit = null,
+        ?float $start = null,
+        ?float $total = null,
     ): self {
         $self = new self;
 
@@ -76,7 +76,7 @@ final class AmenityGetParksPlacesResponse implements BaseModel
         return $self;
     }
 
-    public function withLimit(string $limit): self
+    public function withLimit(float $limit): self
     {
         $self = clone $this;
         $self['limit'] = $limit;
@@ -84,7 +84,7 @@ final class AmenityGetParksPlacesResponse implements BaseModel
         return $self;
     }
 
-    public function withStart(string $start): self
+    public function withStart(float $start): self
     {
         $self = clone $this;
         $self['start'] = $start;
@@ -92,7 +92,7 @@ final class AmenityGetParksPlacesResponse implements BaseModel
         return $self;
     }
 
-    public function withTotal(string $total): self
+    public function withTotal(float $total): self
     {
         $self = clone $this;
         $self['total'] = $total;
