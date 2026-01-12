@@ -35,22 +35,24 @@ final class ActivitiesService implements ActivitiesContract
      * @api
      *
      * @param string $id one or more activity unique IDs
-     * @param string $limit Number of results to return per request. Default is 50.
+     * @param int $limit Number of results to return per request. Default is 50.
      * @param string $q term to search on
      * @param string $sort A comma delimited list of fields to sort the results by. Ascending order is assumed for each field unless the field name is prefixed with the unary negative which implies descending order.
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
+     * @return LimitStartPagination<ActivityListResponse>
+     *
      * @throws APIException
      */
     public function list(
         ?string $id = null,
-        ?string $limit = null,
+        ?int $limit = null,
         ?string $q = null,
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ActivityListResponse {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'id' => $id,

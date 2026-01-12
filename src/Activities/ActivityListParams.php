@@ -14,7 +14,7 @@ use Nps\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActivityListParamsShape = array{
  *   id?: string|null,
- *   limit?: string|null,
+ *   limit?: int|null,
  *   q?: string|null,
  *   sort?: string|null,
  *   start?: int|null,
@@ -36,7 +36,7 @@ final class ActivityListParams implements BaseModel
      * Number of results to return per request. Default is 50.
      */
     #[Optional]
-    public ?string $limit;
+    public ?int $limit;
 
     /**
      * term to search on.
@@ -68,7 +68,7 @@ final class ActivityListParams implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $limit = null,
+        ?int $limit = null,
         ?string $q = null,
         ?string $sort = null,
         ?int $start = null,
@@ -98,7 +98,7 @@ final class ActivityListParams implements BaseModel
     /**
      * Number of results to return per request. Default is 50.
      */
-    public function withLimit(string $limit): self
+    public function withLimit(int $limit): self
     {
         $self = clone $this;
         $self['limit'] = $limit;

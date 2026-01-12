@@ -14,9 +14,9 @@ use Nps\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActivityListResponseShape = array{
  *   data?: list<Data|DataShape>|null,
- *   limit?: float|null,
- *   start?: float|null,
- *   total?: float|null,
+ *   limit?: string|null,
+ *   start?: string|null,
+ *   total?: string|null,
  * }
  */
 final class ActivityListResponse implements BaseModel
@@ -29,13 +29,13 @@ final class ActivityListResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?float $limit;
+    public ?string $limit;
 
     #[Optional]
-    public ?float $start;
+    public ?string $start;
 
     #[Optional]
-    public ?float $total;
+    public ?string $total;
 
     public function __construct()
     {
@@ -51,9 +51,9 @@ final class ActivityListResponse implements BaseModel
      */
     public static function with(
         ?array $data = null,
-        ?float $limit = null,
-        ?float $start = null,
-        ?float $total = null,
+        ?string $limit = null,
+        ?string $start = null,
+        ?string $total = null,
     ): self {
         $self = new self;
 
@@ -76,7 +76,7 @@ final class ActivityListResponse implements BaseModel
         return $self;
     }
 
-    public function withLimit(float $limit): self
+    public function withLimit(string $limit): self
     {
         $self = clone $this;
         $self['limit'] = $limit;
@@ -84,7 +84,7 @@ final class ActivityListResponse implements BaseModel
         return $self;
     }
 
-    public function withStart(float $start): self
+    public function withStart(string $start): self
     {
         $self = clone $this;
         $self['start'] = $start;
@@ -92,7 +92,7 @@ final class ActivityListResponse implements BaseModel
         return $self;
     }
 
-    public function withTotal(float $total): self
+    public function withTotal(string $total): self
     {
         $self = clone $this;
         $self['total'] = $total;
