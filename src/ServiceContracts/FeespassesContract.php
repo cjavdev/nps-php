@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
-use Nps\Feespasses\FeespassListResponseItem;
+use Nps\Feespasses\FeespassListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -24,8 +24,6 @@ interface FeespassesContract
      * @param list<string> $statecode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<FeespassListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -36,5 +34,5 @@ interface FeespassesContract
         ?int $start = null,
         ?array $statecode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): FeespassListResponse;
 }

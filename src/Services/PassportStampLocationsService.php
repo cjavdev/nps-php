@@ -7,7 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\PassportStampLocations\PassportStampLocationListResponseItem;
+use Nps\PassportStampLocations\PassportStampLocationListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\PassportStampLocationsContract;
 
@@ -39,8 +39,6 @@ final class PassportStampLocationsService implements PassportStampLocationsContr
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<PassportStampLocationListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -50,7 +48,7 @@ final class PassportStampLocationsService implements PassportStampLocationsContr
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): PassportStampLocationListResponse {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

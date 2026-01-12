@@ -7,7 +7,7 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\Events\EventListResponseItem;
+use Nps\Events\EventListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\EventsContract;
 
@@ -50,8 +50,6 @@ final class EventsService implements EventsContract
      * @param list<string> $tagsOne a comma delimited list of tags that may be included
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<EventListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -72,7 +70,7 @@ final class EventsService implements EventsContract
         ?array $tagsNone = null,
         ?array $tagsOne = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): EventListResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,

@@ -2,6 +2,7 @@
 
 namespace Tests\Services;
 
+use Nps\Articles\ArticleListResponse;
 use Nps\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -36,6 +37,6 @@ final class ArticlesTest extends TestCase
         $result = $this->client->articles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(ArticleListResponse::class, $result);
     }
 }

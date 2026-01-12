@@ -6,13 +6,12 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\TopicsRawContract;
-use Nps\Topics\TopicGetParksResponseItem;
+use Nps\Topics\TopicGetParksResponse;
 use Nps\Topics\TopicListParams;
-use Nps\Topics\TopicListResponseItem;
+use Nps\Topics\TopicListResponse;
 use Nps\Topics\TopicRetrieveParksParams;
 
 /**
@@ -34,7 +33,7 @@ final class TopicsRawService implements TopicsRawContract
      * }|TopicListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TopicListResponseItem>>
+     * @return BaseResponse<TopicListResponse>
      *
      * @throws APIException
      */
@@ -53,7 +52,7 @@ final class TopicsRawService implements TopicsRawContract
             path: 'topics',
             query: $parsed,
             options: $options,
-            convert: new ListOf(TopicListResponseItem::class),
+            convert: TopicListResponse::class,
         );
     }
 
@@ -65,7 +64,7 @@ final class TopicsRawService implements TopicsRawContract
      * }|TopicRetrieveParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TopicGetParksResponseItem>>
+     * @return BaseResponse<TopicGetParksResponse>
      *
      * @throws APIException
      */
@@ -84,7 +83,7 @@ final class TopicsRawService implements TopicsRawContract
             path: 'topics/parks',
             query: $parsed,
             options: $options,
-            convert: new ListOf(TopicGetParksResponseItem::class),
+            convert: TopicGetParksResponse::class,
         );
     }
 }

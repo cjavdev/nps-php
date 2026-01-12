@@ -2,6 +2,8 @@
 
 namespace Tests\Services;
 
+use Nps\Activities\ActivityListParksResponse;
+use Nps\Activities\ActivityListResponse;
 use Nps\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -36,7 +38,7 @@ final class ActivitiesTest extends TestCase
         $result = $this->client->activities->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(ActivityListResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +51,6 @@ final class ActivitiesTest extends TestCase
         $result = $this->client->activities->listParks();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(ActivityListParksResponse::class, $result);
     }
 }

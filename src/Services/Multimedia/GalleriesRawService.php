@@ -6,13 +6,12 @@ namespace Nps\Services\Multimedia;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
 use Nps\Multimedia\Galleries\GalleryListAssetsParams;
-use Nps\Multimedia\Galleries\GalleryListAssetsResponseItem;
+use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
 use Nps\Multimedia\Galleries\GalleryListParams;
-use Nps\Multimedia\Galleries\GalleryListResponseItem;
+use Nps\Multimedia\Galleries\GalleryListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\Multimedia\GalleriesRawContract;
 
@@ -39,7 +38,7 @@ final class GalleriesRawService implements GalleriesRawContract
      * }|GalleryListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<GalleryListResponseItem>>
+     * @return BaseResponse<GalleryListResponse>
      *
      * @throws APIException
      */
@@ -58,7 +57,7 @@ final class GalleriesRawService implements GalleriesRawContract
             path: 'multimedia/galleries',
             query: $parsed,
             options: $options,
-            convert: new ListOf(GalleryListResponseItem::class),
+            convert: GalleryListResponse::class,
         );
     }
 
@@ -76,7 +75,7 @@ final class GalleriesRawService implements GalleriesRawContract
      * }|GalleryListAssetsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<GalleryListAssetsResponseItem>>
+     * @return BaseResponse<GalleryListAssetsResponse>
      *
      * @throws APIException
      */
@@ -95,7 +94,7 @@ final class GalleriesRawService implements GalleriesRawContract
             path: 'multimedia/galleries/assets',
             query: Util::array_transform_keys($parsed, ['galleryID' => 'galleryId']),
             options: $options,
-            convert: new ListOf(GalleryListAssetsResponseItem::class),
+            convert: GalleryListAssetsResponse::class,
         );
     }
 }

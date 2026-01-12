@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Nps\ServiceContracts;
 
-use Nps\Activities\ActivityListParksResponseItem;
-use Nps\Activities\ActivityListResponseItem;
+use Nps\Activities\ActivityListParksResponse;
+use Nps\Activities\ActivityListResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 
@@ -24,8 +24,6 @@ interface ActivitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ActivityListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -35,7 +33,7 @@ interface ActivitiesContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): ActivityListResponse;
 
     /**
      * @api
@@ -47,8 +45,6 @@ interface ActivitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ActivityListParksResponseItem>
-     *
      * @throws APIException
      */
     public function listParks(
@@ -58,5 +54,5 @@ interface ActivitiesContract
         ?array $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): ActivityListParksResponse;
 }

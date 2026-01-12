@@ -3,6 +3,8 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\Topics\TopicGetParksResponse;
+use Nps\Topics\TopicListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -36,7 +38,7 @@ final class TopicsTest extends TestCase
         $result = $this->client->topics->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(TopicListResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +51,6 @@ final class TopicsTest extends TestCase
         $result = $this->client->topics->retrieveParks();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(TopicGetParksResponse::class, $result);
     }
 }

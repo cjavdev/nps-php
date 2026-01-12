@@ -8,7 +8,7 @@ use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
 use Nps\RequestOptions;
-use Nps\RoadEvents\RoadEventListResponseItem;
+use Nps\RoadEvents\RoadEventListResponse;
 use Nps\ServiceContracts\RoadEventsContract;
 
 /**
@@ -36,15 +36,13 @@ final class RoadEventsService implements RoadEventsContract
      * @param string $type either 'incident' or 'workzone'
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<RoadEventListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
         ?string $parkCode = null,
         ?string $type = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): RoadEventListResponse {
         $params = Util::removeNulls(['parkCode' => $parkCode, 'type' => $type]);
 
         // @phpstan-ignore-next-line argument.type

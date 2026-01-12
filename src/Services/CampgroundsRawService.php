@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Nps\Services;
 
 use Nps\Campgrounds\CampgroundListParams;
-use Nps\Campgrounds\CampgroundListResponseItem;
+use Nps\Campgrounds\CampgroundListResponse;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\CampgroundsRawContract;
@@ -37,7 +36,7 @@ final class CampgroundsRawService implements CampgroundsRawContract
      * }|CampgroundListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<CampgroundListResponseItem>>
+     * @return BaseResponse<CampgroundListResponse>
      *
      * @throws APIException
      */
@@ -56,7 +55,7 @@ final class CampgroundsRawService implements CampgroundsRawContract
             path: 'campgrounds',
             query: $parsed,
             options: $options,
-            convert: new ListOf(CampgroundListResponseItem::class),
+            convert: CampgroundListResponse::class,
         );
     }
 }

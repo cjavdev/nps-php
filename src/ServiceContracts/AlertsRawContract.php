@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Alerts\AlertListParams;
-use Nps\Alerts\AlertListResponseItem;
+use Nps\Alerts\AlertListResponse;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
@@ -21,7 +21,7 @@ interface AlertsRawContract
      * @param array<string,mixed>|AlertListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AlertListResponseItem>>
+     * @return BaseResponse<AlertListResponse>
      *
      * @throws APIException
      */

@@ -2,6 +2,9 @@
 
 namespace Tests\Services;
 
+use Nps\Amenities\AmenityGetParksPlacesResponse;
+use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
+use Nps\Amenities\AmenityListResponse;
 use Nps\Client;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -36,7 +39,7 @@ final class AmenitiesTest extends TestCase
         $result = $this->client->amenities->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(AmenityListResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +52,7 @@ final class AmenitiesTest extends TestCase
         $result = $this->client->amenities->retrieveParksPlaces();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(AmenityGetParksPlacesResponse::class, $result);
     }
 
     #[Test]
@@ -62,6 +65,9 @@ final class AmenitiesTest extends TestCase
         $result = $this->client->amenities->retrieveParksVisitorCenters();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(
+            AmenityGetParksVisitorCentersResponse::class,
+            $result
+        );
     }
 }

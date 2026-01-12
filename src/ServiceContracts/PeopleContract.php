@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
-use Nps\People\PersonListResponseItem;
+use Nps\People\PersonListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -23,8 +23,6 @@ interface PeopleContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<PersonListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -34,5 +32,5 @@ interface PeopleContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): PersonListResponse;
 }

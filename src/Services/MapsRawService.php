@@ -6,9 +6,8 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
-use Nps\Maps\MapGetParkBoundariesResponseItem;
+use Nps\Maps\MapGetParkBoundariesResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\MapsRawContract;
 
@@ -29,7 +28,7 @@ final class MapsRawService implements MapsRawContract
      * @param string $sitecode park site code (e.g. abli)
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<MapGetParkBoundariesResponseItem>>
+     * @return BaseResponse<MapGetParkBoundariesResponse>
      *
      * @throws APIException
      */
@@ -42,7 +41,7 @@ final class MapsRawService implements MapsRawContract
             method: 'get',
             path: ['mapdata/parkboundaries/%1$s', $sitecode],
             options: $requestOptions,
-            convert: new ListOf(MapGetParkBoundariesResponseItem::class),
+            convert: MapGetParkBoundariesResponse::class,
         );
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Nps\ServiceContracts;
 
-use Nps\Amenities\AmenityGetParksPlacesResponseItem;
-use Nps\Amenities\AmenityGetParksVisitorCentersResponseItem;
-use Nps\Amenities\AmenityListResponseItem;
+use Nps\Amenities\AmenityGetParksPlacesResponse;
+use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
+use Nps\Amenities\AmenityListResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 
@@ -24,8 +24,6 @@ interface AmenitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<AmenityListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -34,7 +32,7 @@ interface AmenitiesContract
         ?string $q = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): AmenityListResponse;
 
     /**
      * @api
@@ -47,8 +45,6 @@ interface AmenitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<AmenityGetParksPlacesResponseItem>
-     *
      * @throws APIException
      */
     public function retrieveParksPlaces(
@@ -59,7 +55,7 @@ interface AmenitiesContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): AmenityGetParksPlacesResponse;
 
     /**
      * @api
@@ -72,8 +68,6 @@ interface AmenitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<AmenityGetParksVisitorCentersResponseItem>
-     *
      * @throws APIException
      */
     public function retrieveParksVisitorCenters(
@@ -84,5 +78,5 @@ interface AmenitiesContract
         ?array $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): AmenityGetParksVisitorCentersResponse;
 }

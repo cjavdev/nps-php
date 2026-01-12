@@ -7,7 +7,7 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Feespasses\FeespassListParams;
-use Nps\Feespasses\FeespassListResponseItem;
+use Nps\Feespasses\FeespassListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +21,7 @@ interface FeespassesRawContract
      * @param array<string,mixed>|FeespassListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<FeespassListResponseItem>>
+     * @return BaseResponse<FeespassListResponse>
      *
      * @throws APIException
      */

@@ -7,9 +7,9 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
-use Nps\Topics\TopicGetParksResponseItem;
+use Nps\Topics\TopicGetParksResponse;
 use Nps\Topics\TopicListParams;
-use Nps\Topics\TopicListResponseItem;
+use Nps\Topics\TopicListResponse;
 use Nps\Topics\TopicRetrieveParksParams;
 
 /**
@@ -23,7 +23,7 @@ interface TopicsRawContract
      * @param array<string,mixed>|TopicListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TopicListResponseItem>>
+     * @return BaseResponse<TopicListResponse>
      *
      * @throws APIException
      */
@@ -38,7 +38,7 @@ interface TopicsRawContract
      * @param array<string,mixed>|TopicRetrieveParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TopicGetParksResponseItem>>
+     * @return BaseResponse<TopicGetParksResponse>
      *
      * @throws APIException
      */

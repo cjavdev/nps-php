@@ -7,7 +7,7 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Parks\ParkListParams;
-use Nps\Parks\ParkListResponseItem;
+use Nps\Parks\ParkListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +21,7 @@ interface ParksRawContract
      * @param array<string,mixed>|ParkListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ParkListResponseItem>>
+     * @return BaseResponse<ParkListResponse>
      *
      * @throws APIException
      */

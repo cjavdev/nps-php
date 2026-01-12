@@ -6,10 +6,9 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\NewsReleases\NewsReleaseListParams;
-use Nps\NewsReleases\NewsReleaseListResponseItem;
+use Nps\NewsReleases\NewsReleaseListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\NewsReleasesRawContract;
 
@@ -37,7 +36,7 @@ final class NewsReleasesRawService implements NewsReleasesRawContract
      * }|NewsReleaseListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<NewsReleaseListResponseItem>>
+     * @return BaseResponse<NewsReleaseListResponse>
      *
      * @throws APIException
      */
@@ -56,7 +55,7 @@ final class NewsReleasesRawService implements NewsReleasesRawContract
             path: 'newsreleases',
             query: $parsed,
             options: $options,
-            convert: new ListOf(NewsReleaseListResponseItem::class),
+            convert: NewsReleaseListResponse::class,
         );
     }
 }

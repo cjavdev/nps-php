@@ -9,8 +9,8 @@ use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\TopicsContract;
-use Nps\Topics\TopicGetParksResponseItem;
-use Nps\Topics\TopicListResponseItem;
+use Nps\Topics\TopicGetParksResponse;
+use Nps\Topics\TopicListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -40,8 +40,6 @@ final class TopicsService implements TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TopicListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -51,7 +49,7 @@ final class TopicsService implements TopicsContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): TopicListResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -78,8 +76,6 @@ final class TopicsService implements TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TopicGetParksResponseItem>
-     *
      * @throws APIException
      */
     public function retrieveParks(
@@ -89,7 +85,7 @@ final class TopicsService implements TopicsContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): TopicGetParksResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,

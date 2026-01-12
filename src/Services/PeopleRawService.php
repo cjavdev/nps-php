@@ -6,10 +6,9 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\People\PersonListParams;
-use Nps\People\PersonListResponseItem;
+use Nps\People\PersonListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\PeopleRawContract;
 
@@ -36,7 +35,7 @@ final class PeopleRawService implements PeopleRawContract
      * }|PersonListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<PersonListResponseItem>>
+     * @return BaseResponse<PersonListResponse>
      *
      * @throws APIException
      */
@@ -55,7 +54,7 @@ final class PeopleRawService implements PeopleRawContract
             path: 'people',
             query: $parsed,
             options: $options,
-            convert: new ListOf(PersonListResponseItem::class),
+            convert: PersonListResponse::class,
         );
     }
 }

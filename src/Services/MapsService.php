@@ -6,7 +6,7 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
-use Nps\Maps\MapGetParkBoundariesResponseItem;
+use Nps\Maps\MapGetParkBoundariesResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\MapsContract;
 
@@ -34,14 +34,12 @@ final class MapsService implements MapsContract
      * @param string $sitecode park site code (e.g. abli)
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<MapGetParkBoundariesResponseItem>
-     *
      * @throws APIException
      */
     public function retrieveParkBoundaries(
         string $sitecode,
         RequestOptions|array|null $requestOptions = null
-    ): array {
+    ): MapGetParkBoundariesResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveParkBoundaries($sitecode, requestOptions: $requestOptions);
 

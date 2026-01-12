@@ -3,6 +3,7 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\PassportStampLocations\PassportStampLocationListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -36,6 +37,6 @@ final class PassportStampLocationsTest extends TestCase
         $result = $this->client->passportStampLocations->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(PassportStampLocationListResponse::class, $result);
     }
 }

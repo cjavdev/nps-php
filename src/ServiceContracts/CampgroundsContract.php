@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Nps\ServiceContracts;
 
-use Nps\Campgrounds\CampgroundListResponseItem;
+use Nps\Campgrounds\CampgroundListResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
 
@@ -24,8 +24,6 @@ interface CampgroundsContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<CampgroundListResponseItem>
-     *
      * @throws APIException
      */
     public function list(
@@ -36,5 +34,5 @@ interface CampgroundsContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): CampgroundListResponse;
 }

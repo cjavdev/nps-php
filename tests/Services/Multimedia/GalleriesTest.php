@@ -3,6 +3,8 @@
 namespace Tests\Services\Multimedia;
 
 use Nps\Client;
+use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
+use Nps\Multimedia\Galleries\GalleryListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -36,7 +38,7 @@ final class GalleriesTest extends TestCase
         $result = $this->client->multimedia->galleries->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(GalleryListResponse::class, $result);
     }
 
     #[Test]
@@ -49,6 +51,6 @@ final class GalleriesTest extends TestCase
         $result = $this->client->multimedia->galleries->listAssets();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(GalleryListAssetsResponse::class, $result);
     }
 }

@@ -7,7 +7,7 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\NewsReleases\NewsReleaseListParams;
-use Nps\NewsReleases\NewsReleaseListResponseItem;
+use Nps\NewsReleases\NewsReleaseListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +21,7 @@ interface NewsReleasesRawContract
      * @param array<string,mixed>|NewsReleaseListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<NewsReleaseListResponseItem>>
+     * @return BaseResponse<NewsReleaseListResponse>
      *
      * @throws APIException
      */

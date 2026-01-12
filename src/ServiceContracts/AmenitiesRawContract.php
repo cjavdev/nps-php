@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Nps\ServiceContracts;
 
-use Nps\Amenities\AmenityGetParksPlacesResponseItem;
-use Nps\Amenities\AmenityGetParksVisitorCentersResponseItem;
+use Nps\Amenities\AmenityGetParksPlacesResponse;
+use Nps\Amenities\AmenityGetParksVisitorCentersResponse;
 use Nps\Amenities\AmenityListParams;
-use Nps\Amenities\AmenityListResponseItem;
+use Nps\Amenities\AmenityListResponse;
 use Nps\Amenities\AmenityRetrieveParksPlacesParams;
 use Nps\Amenities\AmenityRetrieveParksVisitorCentersParams;
 use Nps\Core\Contracts\BaseResponse;
@@ -25,7 +25,7 @@ interface AmenitiesRawContract
      * @param array<string,mixed>|AmenityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AmenityListResponseItem>>
+     * @return BaseResponse<AmenityListResponse>
      *
      * @throws APIException
      */
@@ -40,7 +40,7 @@ interface AmenitiesRawContract
      * @param array<string,mixed>|AmenityRetrieveParksPlacesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AmenityGetParksPlacesResponseItem>>
+     * @return BaseResponse<AmenityGetParksPlacesResponse>
      *
      * @throws APIException
      */
@@ -55,7 +55,7 @@ interface AmenitiesRawContract
      * @param array<string,mixed>|AmenityRetrieveParksVisitorCentersParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<AmenityGetParksVisitorCentersResponseItem>>
+     * @return BaseResponse<AmenityGetParksVisitorCentersResponse>
      *
      * @throws APIException
      */

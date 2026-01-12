@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Articles\ArticleListParams;
-use Nps\Articles\ArticleListResponseItem;
+use Nps\Articles\ArticleListResponse;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\RequestOptions;
@@ -21,7 +21,7 @@ interface ArticlesRawContract
      * @param array<string,mixed>|ArticleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ArticleListResponseItem>>
+     * @return BaseResponse<ArticleListResponse>
      *
      * @throws APIException
      */
