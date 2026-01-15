@@ -7,9 +7,10 @@ namespace Nps\Services;
 use Nps\Activities\ActivityListParams;
 use Nps\Activities\ActivityListParksParams;
 use Nps\Activities\ActivityListParksResponse;
-use Nps\Activities\ActivityListResponse;
+use Nps\Activities\ActivityListResponseItem;
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
+use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\LimitStartPagination;
 use Nps\RequestOptions;
@@ -34,7 +35,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
      * }|ActivityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<LimitStartPagination<ActivityListResponse>>
+     * @return BaseResponse<list<ActivityListResponseItem>>
      *
      * @throws APIException
      */
@@ -53,8 +54,7 @@ final class ActivitiesRawService implements ActivitiesRawContract
             path: 'activities',
             query: $parsed,
             options: $options,
-            convert: ActivityListResponse::class,
-            page: LimitStartPagination::class,
+            convert: new ListOf(ActivityListResponseItem::class),
         );
     }
 

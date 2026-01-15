@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nps\Activities\ActivityListResponse;
+namespace Nps\Activities\ActivityListResponseItem;
 
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
