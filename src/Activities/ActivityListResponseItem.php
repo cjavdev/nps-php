@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Nps\Activities;
 
-use Nps\Activities\ActivityListResponse\Data;
+use Nps\Activities\ActivityListResponseItem\Data;
 use Nps\Core\Attributes\Optional;
 use Nps\Core\Concerns\SdkModel;
 use Nps\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Nps\Activities\ActivityListResponse\Data
+ * @phpstan-import-type DataShape from \Nps\Activities\ActivityListResponseItem\Data
  *
- * @phpstan-type ActivityListResponseShape = array{
+ * @phpstan-type ActivityListResponseItemShape = array{
  *   data?: list<Data|DataShape>|null,
  *   limit?: string|null,
  *   start?: string|null,
  *   total?: string|null,
  * }
  */
-final class ActivityListResponse implements BaseModel
+final class ActivityListResponseItem implements BaseModel
 {
-    /** @use SdkModel<ActivityListResponseShape> */
+    /** @use SdkModel<ActivityListResponseItemShape> */
     use SdkModel;
 
     /** @var list<Data>|null $data */

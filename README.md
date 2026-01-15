@@ -40,9 +40,9 @@ use Nps\Client;
 
 $client = new Client(apiKey: getenv('NATIONAL_PARK_KEY') ?: 'My API Key');
 
-$page = $client->activities->list();
+$activities = $client->activities->list();
 
-var_dump(STAINLESS_FIXME_item->data);
+var_dump($activities);
 ```
 
 ### Value Objects
@@ -65,7 +65,7 @@ use Nps\Client;
 
 $client = new Client(apiKey: getenv('NATIONAL_PARK_KEY') ?: 'My API Key');
 
-$page = $client->activities->list(limit: 10, start: 10);
+$page = $client->activities->listParks();
 
 var_dump($page);
 
@@ -91,7 +91,7 @@ use Nps\Core\Exceptions\RateLimitException;
 use Nps\Core\Exceptions\APIStatusException;
 
 try {
-  $page = $client->activities->list();
+  $activities = $client->activities->list();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
@@ -152,7 +152,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 ```php
 <?php
 
-$page = $client->activities->list(
+$activities = $client->activities->list(
   requestOptions: [
     'extraQueryParams' => ['my_query_parameter' => 'value'],
     'extraBodyParams' => ['my_body_parameter' => 'value'],
