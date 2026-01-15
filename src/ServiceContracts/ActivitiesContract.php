@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Activities\ActivityListParksResponse;
-use Nps\Activities\ActivityListResponseItem;
+use Nps\Activities\ActivityListResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\LimitStartPagination;
 use Nps\RequestOptions;
@@ -25,7 +25,7 @@ interface ActivitiesContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ActivityListResponseItem>
+     * @return LimitStartPagination<ActivityListResponse>
      *
      * @throws APIException
      */
@@ -36,7 +36,7 @@ interface ActivitiesContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 
     /**
      * @api
