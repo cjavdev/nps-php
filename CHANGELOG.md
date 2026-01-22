@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2026-01-22)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/cjavdev/nps-php/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([01c61b8](https://github.com/cjavdev/nps-php/commit/01c61b81005b0d6559af0034874a92112f902e86))
+
 ## 0.1.0 (2026-01-22)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/cjavdev/nps-php/compare/v0.0.1...v0.1.0)

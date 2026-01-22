@@ -1,6 +1,6 @@
-# Nps PHP API library
+# National Parks API PHP API library
 
-The Nps PHP library provides convenient access to the Nps REST API from any PHP 8.1.0+ application.
+The National Parks API PHP library provides convenient access to the National Parks API REST API from any PHP 8.1.0+ application.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -54,7 +54,7 @@ However, builders are also provided `(new Dog)->withName("Joey")`.
 
 ### Pagination
 
-List methods in the Nps API are paginated.
+List methods in the National Parks API API are paginated.
 
 This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
 

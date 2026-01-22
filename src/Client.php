@@ -159,7 +159,9 @@ class Client extends BaseClient
     ) {
         $this->apiKey = (string) ($apiKey ?? getenv('NATIONAL_PARK_KEY'));
 
-        $baseUrl ??= getenv('NPS_BASE_URL') ?: 'https://developer.nps.gov/api/v1';
+        $baseUrl ??= getenv(
+            'NATIONAL_PARKS_API_BASE_URL'
+        ) ?: 'https://developer.nps.gov/api/v1';
 
         $options = RequestOptions::parse(
             RequestOptions::with(
@@ -175,7 +177,7 @@ class Client extends BaseClient
             headers: [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'User-Agent' => sprintf('nps/PHP %s', VERSION),
+                'User-Agent' => sprintf('National Parks API/PHP %s', VERSION),
                 'X-Stainless-Lang' => 'php',
                 'X-Stainless-Package-Version' => '0.0.1',
                 'X-Stainless-Arch' => Util::machtype(),
