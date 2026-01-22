@@ -7,7 +7,8 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Events\EventListParams;
-use Nps\Events\EventListResponseItem;
+use Nps\Events\EventListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +22,7 @@ interface EventsRawContract
      * @param array<string,mixed>|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<EventListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<EventListResponse>>
      *
      * @throws APIException
      */

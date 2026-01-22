@@ -7,7 +7,8 @@ namespace Nps\ServiceContracts;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
 use Nps\Lessonplans\LessonplanListParams;
-use Nps\Lessonplans\LessonplanListResponseItem;
+use Nps\Lessonplans\LessonplanListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +22,7 @@ interface LessonplansRawContract
      * @param array<string,mixed>|LessonplanListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<LessonplanListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<LessonplanListResponse>>
      *
      * @throws APIException
      */

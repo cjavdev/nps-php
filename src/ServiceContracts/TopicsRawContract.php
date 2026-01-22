@@ -6,11 +6,12 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
-use Nps\Topics\TopicGetParksResponseItem;
 use Nps\Topics\TopicListParams;
-use Nps\Topics\TopicListResponseItem;
-use Nps\Topics\TopicRetrieveParksParams;
+use Nps\Topics\TopicListParksParams;
+use Nps\Topics\TopicListParksResponse;
+use Nps\Topics\TopicListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -23,7 +24,7 @@ interface TopicsRawContract
      * @param array<string,mixed>|TopicListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TopicListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<TopicListResponse>>
      *
      * @throws APIException
      */
@@ -35,15 +36,15 @@ interface TopicsRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|TopicRetrieveParksParams $params
+     * @param array<string,mixed>|TopicListParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TopicGetParksResponseItem>>
+     * @return BaseResponse<LimitStartPagination<TopicListParksResponse>>
      *
      * @throws APIException
      */
-    public function retrieveParks(
-        array|TopicRetrieveParksParams $params,
+    public function listParks(
+        array|TopicListParksParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

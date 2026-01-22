@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Nps\Services;
 
-use Nps\Articles\ArticleListResponseItem;
+use Nps\Articles\ArticleListResponse;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ArticlesContract;
 
@@ -39,7 +40,7 @@ final class ArticlesService implements ArticlesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ArticleListResponseItem>
+     * @return LimitStartPagination<ArticleListResponse>
      *
      * @throws APIException
      */
@@ -50,7 +51,7 @@ final class ArticlesService implements ArticlesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

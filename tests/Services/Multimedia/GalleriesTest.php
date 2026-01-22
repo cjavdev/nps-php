@@ -3,6 +3,9 @@
 namespace Tests\Services\Multimedia;
 
 use Nps\Client;
+use Nps\LimitStartPagination;
+use Nps\Multimedia\Galleries\GalleryListAssetsResponse;
+use Nps\Multimedia\Galleries\GalleryListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -33,10 +36,15 @@ final class GalleriesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->multimedia->galleries->list();
+        $page = $this->client->multimedia->galleries->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(GalleryListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -46,9 +54,14 @@ final class GalleriesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->multimedia->galleries->listAssets();
+        $page = $this->client->multimedia->galleries->listAssets();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(GalleryListAssetsResponse::class, $item);
+        }
     }
 }

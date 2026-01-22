@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
-use Nps\Places\PlaceListResponseItem;
+use Nps\LimitStartPagination;
+use Nps\Places\PlaceListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -23,7 +24,7 @@ interface PlacesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<PlaceListResponseItem>
+     * @return LimitStartPagination<PlaceListResponse>
      *
      * @throws APIException
      */
@@ -34,5 +35,5 @@ interface PlacesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 }

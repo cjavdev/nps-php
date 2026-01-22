@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
-use Nps\People\PersonListResponseItem;
+use Nps\LimitStartPagination;
+use Nps\People\PersonListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -23,7 +24,7 @@ interface PeopleContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<PersonListResponseItem>
+     * @return LimitStartPagination<PersonListResponse>
      *
      * @throws APIException
      */
@@ -34,5 +35,5 @@ interface PeopleContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 }

@@ -3,6 +3,8 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\LimitStartPagination;
+use Nps\RoadEvents\RoadEventListResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -33,9 +35,14 @@ final class RoadEventsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roadEvents->list();
+        $page = $this->client->roadEvents->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(RoadEventListResponse::class, $item);
+        }
     }
 }

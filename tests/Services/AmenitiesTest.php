@@ -2,7 +2,11 @@
 
 namespace Tests\Services;
 
+use Nps\Amenities\AmenityListParksPlacesResponse;
+use Nps\Amenities\AmenityListParksVisitorCentersResponse;
+use Nps\Amenities\AmenityListResponse;
 use Nps\Client;
+use Nps\LimitStartPagination;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -33,35 +37,53 @@ final class AmenitiesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->amenities->list();
+        $page = $this->client->amenities->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AmenityListResponse::class, $item);
+        }
     }
 
     #[Test]
-    public function testRetrieveParksPlaces(): void
+    public function testListParksPlaces(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->amenities->retrieveParksPlaces();
+        $page = $this->client->amenities->listParksPlaces();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AmenityListParksPlacesResponse::class, $item);
+        }
     }
 
     #[Test]
-    public function testRetrieveParksVisitorCenters(): void
+    public function testListParksVisitorCenters(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->amenities->retrieveParksVisitorCenters();
+        $page = $this->client->amenities->listParksVisitorCenters();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(
+                AmenityListParksVisitorCentersResponse::class,
+                $item
+            );
+        }
     }
 }

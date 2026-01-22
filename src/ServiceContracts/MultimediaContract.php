@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
-use Nps\Multimedia\MultimediaListAudioResponseItem;
-use Nps\Multimedia\MultimediaListVideosResponseItem;
+use Nps\LimitStartPagination;
+use Nps\Multimedia\MultimediaListAudioResponse;
+use Nps\Multimedia\MultimediaListVideosResponse;
 use Nps\RequestOptions;
 
 /**
@@ -24,7 +25,7 @@ interface MultimediaContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<MultimediaListAudioResponseItem>
+     * @return LimitStartPagination<MultimediaListAudioResponse>
      *
      * @throws APIException
      */
@@ -35,7 +36,7 @@ interface MultimediaContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 
     /**
      * @api
@@ -47,7 +48,7 @@ interface MultimediaContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<MultimediaListVideosResponseItem>
+     * @return LimitStartPagination<MultimediaListVideosResponse>
      *
      * @throws APIException
      */
@@ -58,5 +59,5 @@ interface MultimediaContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 }

@@ -7,7 +7,8 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\NewsReleases\NewsReleaseListResponseItem;
+use Nps\LimitStartPagination;
+use Nps\NewsReleases\NewsReleaseListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\NewsReleasesContract;
 
@@ -40,7 +41,7 @@ final class NewsReleasesService implements NewsReleasesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<NewsReleaseListResponseItem>
+     * @return LimitStartPagination<NewsReleaseListResponse>
      *
      * @throws APIException
      */
@@ -52,7 +53,7 @@ final class NewsReleasesService implements NewsReleasesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

@@ -3,6 +3,8 @@
 namespace Tests\Services;
 
 use Nps\Client;
+use Nps\Events\EventListResponse;
+use Nps\LimitStartPagination;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -33,9 +35,14 @@ final class EventsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->events->list();
+        $page = $this->client->events->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsList($result);
+        $this->assertInstanceOf(LimitStartPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(EventListResponse::class, $item);
+        }
     }
 }

@@ -7,9 +7,10 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\VisitorCentersContract;
-use Nps\VisitorCenters\VisitorCenterListResponseItem;
+use Nps\VisitorCenters\VisitorCenterListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -40,7 +41,7 @@ final class VisitorCentersService implements VisitorCentersContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<VisitorCenterListResponseItem>
+     * @return LimitStartPagination<VisitorCenterListResponse>
      *
      * @throws APIException
      */
@@ -52,7 +53,7 @@ final class VisitorCentersService implements VisitorCentersContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

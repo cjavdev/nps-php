@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Nps\ServiceContracts;
 
-use Nps\Alerts\AlertListResponseItem;
+use Nps\Alerts\AlertListResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -23,7 +24,7 @@ interface AlertsContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<AlertListResponseItem>
+     * @return LimitStartPagination<AlertListResponse>
      *
      * @throws APIException
      */
@@ -34,5 +35,5 @@ interface AlertsContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 }

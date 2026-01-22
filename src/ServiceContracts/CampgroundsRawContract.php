@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Campgrounds\CampgroundListParams;
-use Nps\Campgrounds\CampgroundListResponseItem;
+use Nps\Campgrounds\CampgroundListResponse;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +22,7 @@ interface CampgroundsRawContract
      * @param array<string,mixed>|CampgroundListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<CampgroundListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<CampgroundListResponse>>
      *
      * @throws APIException
      */

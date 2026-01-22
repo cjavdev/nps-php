@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
-use Nps\Tours\TourListResponseItem;
+use Nps\Tours\TourListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -25,7 +26,7 @@ interface ToursContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TourListResponseItem>
+     * @return LimitStartPagination<TourListResponse>
      *
      * @throws APIException
      */
@@ -38,5 +39,5 @@ interface ToursContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 }

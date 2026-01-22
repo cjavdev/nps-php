@@ -7,7 +7,8 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\People\PersonListResponseItem;
+use Nps\LimitStartPagination;
+use Nps\People\PersonListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\PeopleContract;
 
@@ -39,7 +40,7 @@ final class PeopleService implements PeopleContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<PersonListResponseItem>
+     * @return LimitStartPagination<PersonListResponse>
      *
      * @throws APIException
      */
@@ -50,7 +51,7 @@ final class PeopleService implements PeopleContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

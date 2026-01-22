@@ -1,12 +1,5 @@
 # Nps PHP API library
 
-> [!NOTE]
-> The Nps PHP API Library is currently in **beta** and we're excited for you to experiment with it!
->
-> This library has not yet been exhaustively tested in production environments and may be missing some features you'd expect in a stable release. As we continue development, there may be breaking changes that require updates to your code.
->
-> **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/stainless-sdks/nps-php/issues/new).
-
 The Nps PHP library provides convenient access to the Nps REST API from any PHP 8.1.0+ application.
 
 It is generated with [Stainless](https://www.stainless.com/).
@@ -17,19 +10,23 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 To use this package, install via Composer by adding the following to your application's `composer.json`:
 
+<!-- x-release-please-start-version -->
+
 ```json
 {
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:stainless-sdks/nps-php.git"
+      "url": "git@github.com:cjavdev/nps-php.git"
     }
   ],
   "require": {
-    "org-placeholder/nps": "dev-main"
+    "cjavdev/nps-php": "dev-main"
   }
 }
 ```
+
+<!-- x-release-please-end -->
 
 ## Usage
 
@@ -43,9 +40,9 @@ use Nps\Client;
 
 $client = new Client(apiKey: getenv('NATIONAL_PARK_KEY') ?: 'My API Key');
 
-$activities = $client->activities->list();
+$page = $client->activities->list();
 
-var_dump($activities);
+var_dump($page->data);
 ```
 
 ### Value Objects
@@ -55,6 +52,33 @@ and named parameters to initialize value objects.
 
 However, builders are also provided `(new Dog)->withName("Joey")`.
 
+### Pagination
+
+List methods in the Nps API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```php
+<?php
+
+use Nps\Client;
+
+$client = new Client(apiKey: getenv('NATIONAL_PARK_KEY') ?: 'My API Key');
+
+$page = $client->activities->list(limit: 10, start: 10);
+
+var_dump($page);
+
+// fetch items from the current page
+foreach ($page->getItems() as $item) {
+  var_dump($item->data);
+}
+// make additional network requests to fetch items from all pages, including and after the current page
+foreach ($page->pagingEachItem() as $item) {
+  var_dump($item->data);
+}
+```
+
 ### Handling errors
 
 When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Nps\Core\Exceptions\APIException` will be thrown:
@@ -63,15 +87,17 @@ When the library is unable to connect to the API, or if the API returns a non-su
 <?php
 
 use Nps\Core\Exceptions\APIConnectionException;
+use Nps\Core\Exceptions\RateLimitException;
+use Nps\Core\Exceptions\APIStatusException;
 
 try {
-  $activities = $client->activities->list();
+  $page = $client->activities->list();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $e) {
+} catch (RateLimitException $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
-} catch (APIStatusError $e) {
+} catch (APIStatusException $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
   echo $e->getMessage();
 }
@@ -126,7 +152,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 ```php
 <?php
 
-$activities = $client->activities->list(
+$page = $client->activities->list(
   requestOptions: [
     'extraQueryParams' => ['my_query_parameter' => 'value'],
     'extraBodyParams' => ['my_body_parameter' => 'value'],
@@ -167,4 +193,4 @@ PHP 8.1.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/nps-php/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/cjavdev/nps-php/tree/main/CONTRIBUTING.md).

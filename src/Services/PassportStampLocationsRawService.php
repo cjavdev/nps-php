@@ -6,10 +6,10 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\PassportStampLocations\PassportStampLocationListParams;
-use Nps\PassportStampLocations\PassportStampLocationListResponseItem;
+use Nps\PassportStampLocations\PassportStampLocationListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\PassportStampLocationsRawContract;
 
@@ -36,7 +36,7 @@ final class PassportStampLocationsRawService implements PassportStampLocationsRa
      * }|PassportStampLocationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<PassportStampLocationListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<PassportStampLocationListResponse>>
      *
      * @throws APIException
      */
@@ -55,7 +55,8 @@ final class PassportStampLocationsRawService implements PassportStampLocationsRa
             path: 'passportstamplocations',
             query: $parsed,
             options: $options,
-            convert: new ListOf(PassportStampLocationListResponseItem::class),
+            convert: PassportStampLocationListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

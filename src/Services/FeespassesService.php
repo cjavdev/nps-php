@@ -7,7 +7,8 @@ namespace Nps\Services;
 use Nps\Client;
 use Nps\Core\Exceptions\APIException;
 use Nps\Core\Util;
-use Nps\Feespasses\FeespassListResponseItem;
+use Nps\Feespasses\FeespassListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\FeespassesContract;
 
@@ -40,7 +41,7 @@ final class FeespassesService implements FeespassesContract
      * @param list<string> $statecode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<FeespassListResponseItem>
+     * @return LimitStartPagination<FeespassListResponse>
      *
      * @throws APIException
      */
@@ -52,7 +53,7 @@ final class FeespassesService implements FeespassesContract
         ?int $start = null,
         ?array $statecode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
+    ): LimitStartPagination {
         $params = Util::removeNulls(
             [
                 'limit' => $limit,

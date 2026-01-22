@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
-use Nps\NewsReleases\NewsReleaseListResponseItem;
+use Nps\LimitStartPagination;
+use Nps\NewsReleases\NewsReleaseListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -24,7 +25,7 @@ interface NewsReleasesContract
      * @param list<string> $stateCode a comma delimited list of 2 character state codes
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<NewsReleaseListResponseItem>
+     * @return LimitStartPagination<NewsReleaseListResponse>
      *
      * @throws APIException
      */
@@ -36,5 +37,5 @@ interface NewsReleasesContract
         ?int $start = null,
         ?array $stateCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 }

@@ -6,9 +6,10 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\Tours\TourListParams;
-use Nps\Tours\TourListResponseItem;
+use Nps\Tours\TourListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -21,7 +22,7 @@ interface ToursRawContract
      * @param array<string,mixed>|TourListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<TourListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<TourListResponse>>
      *
      * @throws APIException
      */

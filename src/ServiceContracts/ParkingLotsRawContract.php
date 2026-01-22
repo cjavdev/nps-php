@@ -6,8 +6,9 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\ParkingLots\ParkingLotListParams;
-use Nps\ParkingLots\ParkingLotListResponseItem;
+use Nps\ParkingLots\ParkingLotListResponse;
 use Nps\RequestOptions;
 
 /**
@@ -21,7 +22,7 @@ interface ParkingLotsRawContract
      * @param array<string,mixed>|ParkingLotListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ParkingLotListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<ParkingLotListResponse>>
      *
      * @throws APIException
      */

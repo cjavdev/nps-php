@@ -6,10 +6,10 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\Parks\ParkListParams;
-use Nps\Parks\ParkListResponseItem;
+use Nps\Parks\ParkListResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\ParksRawContract;
 
@@ -37,7 +37,7 @@ final class ParksRawService implements ParksRawContract
      * }|ParkListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ParkListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<ParkListResponse>>
      *
      * @throws APIException
      */
@@ -56,7 +56,8 @@ final class ParksRawService implements ParksRawContract
             path: 'parks',
             query: $parsed,
             options: $options,
-            convert: new ListOf(ParkListResponseItem::class),
+            convert: ParkListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

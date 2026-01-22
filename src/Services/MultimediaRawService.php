@@ -6,12 +6,12 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\Multimedia\MultimediaListAudioParams;
-use Nps\Multimedia\MultimediaListAudioResponseItem;
+use Nps\Multimedia\MultimediaListAudioResponse;
 use Nps\Multimedia\MultimediaListVideosParams;
-use Nps\Multimedia\MultimediaListVideosResponseItem;
+use Nps\Multimedia\MultimediaListVideosResponse;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\MultimediaRawContract;
 
@@ -38,7 +38,7 @@ final class MultimediaRawService implements MultimediaRawContract
      * }|MultimediaListAudioParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<MultimediaListAudioResponseItem>>
+     * @return BaseResponse<LimitStartPagination<MultimediaListAudioResponse>>
      *
      * @throws APIException
      */
@@ -57,7 +57,8 @@ final class MultimediaRawService implements MultimediaRawContract
             path: 'multimedia/audio',
             query: $parsed,
             options: $options,
-            convert: new ListOf(MultimediaListAudioResponseItem::class),
+            convert: MultimediaListAudioResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 
@@ -73,7 +74,7 @@ final class MultimediaRawService implements MultimediaRawContract
      * }|MultimediaListVideosParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<MultimediaListVideosResponseItem>>
+     * @return BaseResponse<LimitStartPagination<MultimediaListVideosResponse>>
      *
      * @throws APIException
      */
@@ -92,7 +93,8 @@ final class MultimediaRawService implements MultimediaRawContract
             path: 'multimedia/videos',
             query: $parsed,
             options: $options,
-            convert: new ListOf(MultimediaListVideosResponseItem::class),
+            convert: MultimediaListVideosResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

@@ -6,10 +6,11 @@ namespace Nps\ServiceContracts;
 
 use Nps\Activities\ActivityListParams;
 use Nps\Activities\ActivityListParksParams;
-use Nps\Activities\ActivityListParksResponseItem;
-use Nps\Activities\ActivityListResponseItem;
+use Nps\Activities\ActivityListParksResponse;
+use Nps\Activities\ActivityListResponse;
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 
 /**
@@ -23,7 +24,7 @@ interface ActivitiesRawContract
      * @param array<string,mixed>|ActivityListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ActivityListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<ActivityListResponse>>
      *
      * @throws APIException
      */
@@ -38,7 +39,7 @@ interface ActivitiesRawContract
      * @param array<string,mixed>|ActivityListParksParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ActivityListParksResponseItem>>
+     * @return BaseResponse<LimitStartPagination<ActivityListParksResponse>>
      *
      * @throws APIException
      */

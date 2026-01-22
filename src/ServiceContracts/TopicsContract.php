@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Nps\ServiceContracts;
 
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
-use Nps\Topics\TopicGetParksResponseItem;
-use Nps\Topics\TopicListResponseItem;
+use Nps\Topics\TopicListParksResponse;
+use Nps\Topics\TopicListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -24,7 +25,7 @@ interface TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TopicListResponseItem>
+     * @return LimitStartPagination<TopicListResponse>
      *
      * @throws APIException
      */
@@ -35,7 +36,7 @@ interface TopicsContract
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 
     /**
      * @api
@@ -47,16 +48,16 @@ interface TopicsContract
      * @param int $start Get the next [limit] results starting with this number. Default is 0.
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<TopicGetParksResponseItem>
+     * @return LimitStartPagination<TopicListParksResponse>
      *
      * @throws APIException
      */
-    public function retrieveParks(
+    public function listParks(
         ?array $id = null,
         ?int $limit = null,
         ?string $q = null,
         ?string $sort = null,
         ?int $start = null,
         RequestOptions|array|null $requestOptions = null,
-    ): array;
+    ): LimitStartPagination;
 }

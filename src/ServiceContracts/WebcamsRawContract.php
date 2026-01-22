@@ -6,9 +6,10 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\Webcams\WebcamListParams;
-use Nps\Webcams\WebcamListResponseItem;
+use Nps\Webcams\WebcamListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -21,7 +22,7 @@ interface WebcamsRawContract
      * @param array<string,mixed>|WebcamListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<WebcamListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<WebcamListResponse>>
      *
      * @throws APIException
      */

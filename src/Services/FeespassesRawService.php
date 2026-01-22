@@ -6,10 +6,10 @@ namespace Nps\Services;
 
 use Nps\Client;
 use Nps\Core\Contracts\BaseResponse;
-use Nps\Core\Conversion\ListOf;
 use Nps\Core\Exceptions\APIException;
 use Nps\Feespasses\FeespassListParams;
-use Nps\Feespasses\FeespassListResponseItem;
+use Nps\Feespasses\FeespassListResponse;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\ServiceContracts\FeespassesRawContract;
 
@@ -37,7 +37,7 @@ final class FeespassesRawService implements FeespassesRawContract
      * }|FeespassListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<FeespassListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<FeespassListResponse>>
      *
      * @throws APIException
      */
@@ -56,7 +56,8 @@ final class FeespassesRawService implements FeespassesRawContract
             path: 'feespasses',
             query: $parsed,
             options: $options,
-            convert: new ListOf(FeespassListResponseItem::class),
+            convert: FeespassListResponse::class,
+            page: LimitStartPagination::class,
         );
     }
 }

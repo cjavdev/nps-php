@@ -6,9 +6,10 @@ namespace Nps\ServiceContracts;
 
 use Nps\Core\Contracts\BaseResponse;
 use Nps\Core\Exceptions\APIException;
+use Nps\LimitStartPagination;
 use Nps\RequestOptions;
 use Nps\VisitorCenters\VisitorCenterListParams;
-use Nps\VisitorCenters\VisitorCenterListResponseItem;
+use Nps\VisitorCenters\VisitorCenterListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Nps\RequestOptions
@@ -21,7 +22,7 @@ interface VisitorCentersRawContract
      * @param array<string,mixed>|VisitorCenterListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<VisitorCenterListResponseItem>>
+     * @return BaseResponse<LimitStartPagination<VisitorCenterListResponse>>
      *
      * @throws APIException
      */
