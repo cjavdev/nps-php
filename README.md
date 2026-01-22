@@ -42,7 +42,7 @@ $client = new Client(apiKey: getenv('NATIONAL_PARK_KEY') ?: 'My API Key');
 
 $page = $client->activities->list();
 
-var_dump(STAINLESS_FIXME_item->data);
+var_dump($page->data);
 ```
 
 ### Value Objects
